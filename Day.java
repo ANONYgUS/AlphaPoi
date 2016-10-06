@@ -1,3 +1,7 @@
+/**
+I disagree with the existence of this. Instead of making classes containing all the values and allowing us to access the values with
+methods, we should just use the giant quadtruple layer arraylist I mentioned to you earlier.
+*/
 public class Day {
 	
 	//instance variables
