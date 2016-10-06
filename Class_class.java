@@ -2,6 +2,9 @@ public class Class_class{
 	
 	//instance variables
 	private String className;
+	/**
+	start time and end time seem unnecessary because we can associate them with slot
+	*/
 	private String startTime;
 	private String endTime;
 	private String location;
