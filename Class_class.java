@@ -1,4 +1,4 @@
-public class Class{
+public class Class_class{
 	
 	//instance variables
 	private String className;
@@ -9,7 +9,7 @@ public class Class{
 	private String teacher;
 	
 	//constructor
-	public Class(String c, String s, String e, String l, char sl, String t){
+	public Class_class(String c, String s, String e, String l, char sl, String t){
 		className = c;
 		startTime = s;
 		endTime = e;
