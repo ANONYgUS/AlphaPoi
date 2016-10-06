@@ -26,7 +26,7 @@ public class SDay {
 		class8 = c8;
 		
 		//put all classes into a array for easier referencing
-		private ArrayList classes = new ArrayList<Class_class>;
+		ArrayList classes = new ArrayList<Class_class>();
 		classes.add(class1);
 		classes.add(class2);
 		classes.add(class3);
