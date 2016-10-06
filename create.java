@@ -31,7 +31,7 @@ class  create
 
     Scanner s = new Scanner(new File(pathToCSVFile));
     
-    System.out.println(indexesStudent.size());
+    System.out.println("Number of Students: "+indexesStudent.size());
     
     for(int i = 0; i<indexesStudent.size(); i++){
         int start = indexesStudent.get(i).intValue();
@@ -78,7 +78,7 @@ class  create
         MondayClasses.add(c6);
         MondayClasses.add(c7);
         
-        int counter = 0;
+        int count = 0;
         for(String currentLine: infoMondayByString){
             System.out.println(currentLine);
             String[] input = currentLine.split(",");
@@ -88,19 +88,27 @@ class  create
             String location = input[3];
             char slot = input[4].charAt(0);
             String teacher = input[5];
-            //MondayClasses.get(counter) = new Class_class(className, startTime, endTime, location, slot, teacher);
-            counter ++;
+            MondayClasses.get(count).cName(className);
+            MondayClasses.get(count).cStartTime(startTime);
+            MondayClasses.get(count).cEndTime(endTime);
+            MondayClasses.get(count).cLocation(location);
+            MondayClasses.get(count).cSlot(slot);
+            MondayClasses.get(count).cTeacher(teacher);
+            count++;
         }
-        
+        System.out.println("counter: "+count);
         
         for(int a = 0; a < 7; a++){
-            for(int nn = 0; nn< counter; nn++){
-                if(MondayClasses.get(nn).getSlot() == MondaySlots[a]){
+            for(int nn = 0; nn< count; nn++){
+                //System.out.println("correct slot: "+MondaySlots[a]);
+				//System.out.println("current slot: "+Character.toLowerCase(MondayClasses.get(nn).getSlot()));
+                if(Character.toLowerCase(MondayClasses.get(nn).getSlot()) == MondaySlots[a]){
                     MondayClasses.get(nn).cPosition(a+1);
                     break;
                 }
             }
         }
+        System.out.println();
         System.out.println(c1.getPosition());
         System.out.println(c2.getPosition());
         System.out.println(c3.getPosition());
