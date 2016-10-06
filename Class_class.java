@@ -7,6 +7,7 @@ public class Class_class{
 	private String location;
 	private char slot;
 	private String teacher;
+	private int position;
 	
 	//constructor
 	public Class_class(String c, String s, String e, String l, char sl, String t){
@@ -16,6 +17,18 @@ public class Class_class{
 		location = l;
 		slot = sl;
 		teacher = t;
+		position = 1;
+	}
+	
+	//empty constructor
+	public Class_class(){
+		className = "";
+		startTime = "";
+		endTime = "";
+		location = "";
+		slot = 'a';
+		teacher = "";
+		position = 0;
 	}
 	
 	//methods to retrieve information
@@ -38,6 +51,9 @@ public class Class_class{
 	public String getTeacher(){
 		return teacher;
 	}
+	public int getPosition(){
+		return position;
+	}
 	
 	//methods to change information
 	
@@ -58,6 +74,9 @@ public class Class_class{
 	}
 	public void cTeacher(String t){
 		teacher = t;
+	}
+	public void cPosition(int p){
+		position = p;
 	}
 	
 }

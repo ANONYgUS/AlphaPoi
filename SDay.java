@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class SDay {
 	
 	//instance variables
@@ -12,7 +14,7 @@ public class SDay {
 	private Class_class class7;
 	private Class_class class8;
 	
-	
+	ArrayList<Class_class> classes = new ArrayList<Class_class>();
 	
 	//constructor
 	public SDay(Class_class c1, Class_class c2, Class_class c3, Class_class c4, Class_class c5, Class_class c6, Class_class c7, Class_class c8){
@@ -26,7 +28,7 @@ public class SDay {
 		class8 = c8;
 		
 		//put all classes into a array for easier referencing
-		ArrayList classes = new ArrayList<Class_class>();
+		
 		classes.add(class1);
 		classes.add(class2);
 		classes.add(class3);
