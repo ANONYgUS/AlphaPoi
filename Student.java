@@ -1,8 +1,8 @@
 public class Student
 {
 	
-	private String grade;
 	private String fullName;
+	private String grade;
 	private Day monday;
 	private Day tuesday;
 	private Day wednesday;
@@ -21,8 +21,8 @@ public class Student
 	}
 	
 	public Student(String f, String g, Day d1, Day d2, Day d3, SDay d4, Day d5){
-		grade = g;
 		fullName = f;
+		grade = g;
 		monday = d1;
 		tuesday = d2;
 		wednesday = d3;
