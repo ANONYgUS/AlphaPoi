@@ -53,6 +53,7 @@ class  create
         
         // MONDAY CODE BLOCK START ----------------------------------------------------------------------------------------
         
+        System.out.println("MONDAY");
         char[] MondaySlots = {'c','a','d','h','b','g','e'};
         String infoMonday = infoStudent.substring(infoStudent.indexOf("Monday")+76, infoStudent.indexOf("Tuesday"));
         Scanner Mon_scan = new Scanner(infoMonday);
@@ -135,6 +136,7 @@ class  create
         
         //TUESDAY CODE BLOCK START----------------------------------------------------------------------------
         
+        System.out.println("TUESDAY");
         char[] TuesdaySlots = {'d','a','e','h','b','f','c'};
         String infoTuesday = infoStudent.substring(infoStudent.indexOf("Tuesday")+77, infoStudent.indexOf("Wednesday"));
         Scanner Tue_scan = new Scanner(infoTuesday);
@@ -209,6 +211,85 @@ class  create
         System.out.println();
         
         Day Tuesday = new Day(c1TUE, c2TUE, c3TUE, c4TUE, c5TUE, c6TUE, c7TUE);
+        // TUESDAY CODE BLOCK END
+        
+        // WEDNESDAY CODE BLOCK START----------------------------------------------------------------------------
+        
+        System.out.println("WEDNESDAY");
+        char[] WednesdaySlots = {'e','a','f','h','b','c','g'};
+        String infoWednesday = infoStudent.substring(infoStudent.indexOf("Wednesday")+79, infoStudent.indexOf("Thursday"));
+        Scanner Wed_scan = new Scanner(infoWednesday);
+        
+        //how many courses on Tuesday
+        ArrayList<String> infoWednesdayByString = new ArrayList<String>();
+        
+        while(Wed_scan.hasNextLine()){
+            infoWednesdayByString.add(Wed_scan.nextLine());
+        }
+        
+        Class_class c1WED = new Class_class();
+        Class_class c2WED = new Class_class();
+        Class_class c3WED = new Class_class();
+        Class_class c4WED = new Class_class();
+        Class_class c5WED = new Class_class();
+        Class_class c6WED = new Class_class();
+        Class_class c7WED = new Class_class();
+        
+        ArrayList<Class_class> WednesdayClasses = new ArrayList<Class_class>();
+        WednesdayClasses.add(c1WED);
+        WednesdayClasses.add(c2WED);
+        WednesdayClasses.add(c3WED);
+        WednesdayClasses.add(c4WED);
+        WednesdayClasses.add(c5WED);
+        WednesdayClasses.add(c6WED);
+        WednesdayClasses.add(c7WED);
+        
+        count = 0;
+        for(String currentLine: infoWednesdayByString){
+            char rightSlot = WednesdaySlots[count];
+            
+            System.out.println(currentLine);
+            String[] input = currentLine.split(",");
+            String className = input[0];
+            String startTime = input[1];
+            String endTime = input[2];
+            String location = input[3];
+            char slot = input[4].charAt(0);
+            String teacher = input[5];
+            
+            //System.out.println("rightSlot: "+rightSlot);
+            //System.out.println("current slot: "+slot);
+            
+            if(Character.toLowerCase(slot) == rightSlot){
+                WednesdayClasses.get(count).cAll(className, startTime, endTime, location, slot, teacher, count+1);
+           }
+           else if(Character.toLowerCase(slot) == WednesdaySlots[count+1]){
+               WednesdayClasses.get(count+1).cAll(className, startTime, endTime, location, slot, teacher, count+2);
+               count++;
+           }
+           else if(Character.toLowerCase(slot) == WednesdaySlots[count+2]){
+               WednesdayClasses.get(count+2).cAll(className, startTime, endTime, location, slot, teacher, count+3);
+               count+=2;
+           }
+           else if(Character.toLowerCase(slot) == WednesdaySlots[count+3]){
+               WednesdayClasses.get(count+3).cAll(className, startTime, endTime, location, slot, teacher, count+4);
+               count+=3;
+           }
+            count++;
+        }
+        //System.out.println("counter: "+count);
+        System.out.println("CLASS POSITIONS: ");
+        System.out.print(c1WED.getPosition());
+        System.out.print(c2WED.getPosition());
+        System.out.print(c3WED.getPosition());
+        System.out.print(c4WED.getPosition());
+        System.out.print(c5WED.getPosition());
+        System.out.print(c6WED.getPosition());
+        System.out.print(c7WED.getPosition());
+        System.out.println();
+        System.out.println();
+        
+        Day Wednesday = new Day(c1WED, c2WED, c3WED, c4WED, c5WED, c6WED, c7WED);
         // TUESDAY CODE BLOCK END
     }
   }
