@@ -470,7 +470,7 @@ class  create
         
         //Now we can create the Student object!
         Student thisStudent = new Student(studentName, studentGrade, Monday, Tuesday, Wednesday, Thursday, Friday);
-        
+		
         if(thisStudent.getGrade().equals("12")){
            seniors.add(thisStudent);
         }
@@ -483,6 +483,17 @@ class  create
         else if(thisStudent.getGrade().equals("9")){
             freshmen.add(thisStudent);
         }
+		
+		/**
+		Object Hierarchy:
+		
+		Grade ArrayList
+			Student Object
+				Day Object
+					Class_class Object
+					
+		*/
+		
     }
   }
   
