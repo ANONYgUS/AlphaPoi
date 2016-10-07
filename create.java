@@ -42,7 +42,7 @@ class  create
         else{
             end = linesInCSVFile;
         }
-        System.out.println(start + " "+ end);
+        //System.out.println(start + " "+ end);
         
         //a String containing the block of information for each student
         String infoStudent = "";
@@ -80,6 +80,8 @@ class  create
         
         int count = 0;
         for(String currentLine: infoMondayByString){
+            char rightSlot = MondaySlots[count];
+            
             System.out.println(currentLine);
             String[] input = currentLine.split(",");
             String className = input[0];
@@ -88,34 +90,64 @@ class  create
             String location = input[3];
             char slot = input[4].charAt(0);
             String teacher = input[5];
-            MondayClasses.get(count).cName(className);
-            MondayClasses.get(count).cStartTime(startTime);
-            MondayClasses.get(count).cEndTime(endTime);
-            MondayClasses.get(count).cLocation(location);
-            MondayClasses.get(count).cSlot(slot);
-            MondayClasses.get(count).cTeacher(teacher);
+            
+            //System.out.println("rightSlot: "+rightSlot);
+            //System.out.println("current slot: "+slot);
+            
+            if(Character.toLowerCase(slot) == rightSlot){
+                MondayClasses.get(count).cName(className);
+                MondayClasses.get(count).cStartTime(startTime);
+                MondayClasses.get(count).cEndTime(endTime);
+                MondayClasses.get(count).cLocation(location);
+                MondayClasses.get(count).cSlot(slot);
+                MondayClasses.get(count).cTeacher(teacher);
+                MondayClasses.get(count).cPosition(count+1);
+           }
+           else if(Character.toLowerCase(slot) == MondaySlots[count+1]){
+               MondayClasses.get(count+1).cName(className);
+               MondayClasses.get(count+1).cStartTime(startTime);
+               MondayClasses.get(count+1).cEndTime(endTime);
+               MondayClasses.get(count+1).cLocation(location);
+               MondayClasses.get(count+1).cSlot(slot);
+               MondayClasses.get(count+1).cTeacher(teacher);
+               MondayClasses.get(count+1).cPosition(count+2);
+               count++;
+           }
+           else if(Character.toLowerCase(slot) == MondaySlots[count+2]){
+               MondayClasses.get(count+2).cName(className);
+               MondayClasses.get(count+2).cStartTime(startTime);
+               MondayClasses.get(count+2).cEndTime(endTime);
+               MondayClasses.get(count+2).cLocation(location);
+               MondayClasses.get(count+2).cSlot(slot);
+               MondayClasses.get(count+2).cTeacher(teacher);
+               MondayClasses.get(count+2).cPosition(count+3);
+               count+=2;
+           }
+           else if(Character.toLowerCase(slot) == MondaySlots[count+3]){
+               MondayClasses.get(count+3).cName(className);
+               MondayClasses.get(count+3).cStartTime(startTime);
+               MondayClasses.get(count+3).cEndTime(endTime);
+               MondayClasses.get(count+3).cLocation(location);
+               MondayClasses.get(count+3).cSlot(slot);
+               MondayClasses.get(count+3).cTeacher(teacher);
+               MondayClasses.get(count+3).cPosition(count+4);
+               count+=3;
+           }
             count++;
         }
-        System.out.println("counter: "+count);
+        //System.out.println("counter: "+count);
         
-        for(int a = 0; a < 7; a++){
-            for(int nn = 0; nn< count; nn++){
-                //System.out.println("correct slot: "+MondaySlots[a]);
-				//System.out.println("current slot: "+Character.toLowerCase(MondayClasses.get(nn).getSlot()));
-                if(Character.toLowerCase(MondayClasses.get(nn).getSlot()) == MondaySlots[a]){
-                    MondayClasses.get(nn).cPosition(a+1);
-                    break;
-                }
-            }
-        }
+        
+        System.out.println("CLASS POSITIONS: ");
+        System.out.print(c1.getPosition());
+        System.out.print(c2.getPosition());
+        System.out.print(c3.getPosition());
+        System.out.print(c4.getPosition());
+        System.out.print(c5.getPosition());
+        System.out.print(c6.getPosition());
+        System.out.print(c7.getPosition());
         System.out.println();
-        System.out.println(c1.getPosition());
-        System.out.println(c2.getPosition());
-        System.out.println(c3.getPosition());
-        System.out.println(c4.getPosition());
-        System.out.println(c5.getPosition());
-        System.out.println(c6.getPosition());
-        System.out.println(c7.getPosition());
+        System.out.println();
         
         
         
