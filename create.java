@@ -42,7 +42,7 @@ class  create
         else{
             end = linesInCSVFile;
         }
-        //System.out.println(start + " "+ end);
+        System.out.println(start + " "+ end);
         
         //a String containing the block of information for each student
         String infoStudent = "";
@@ -50,33 +50,36 @@ class  create
             infoStudent += s.nextLine()+"\n";
         }
         
+        
+        // MONDAY CODE BLOCK START ----------------------------------------------------------------------------------------
+        
         char[] MondaySlots = {'c','a','d','h','b','g','e'};
         String infoMonday = infoStudent.substring(infoStudent.indexOf("Monday")+76, infoStudent.indexOf("Tuesday"));
-        Scanner m = new Scanner(infoMonday);
+        Scanner Mon_scan = new Scanner(infoMonday);
         
         //how many courses on Monday
         ArrayList<String> infoMondayByString = new ArrayList<String>();
         
-        while(m.hasNextLine()){
-            infoMondayByString.add(m.nextLine());
+        while(Mon_scan.hasNextLine()){
+            infoMondayByString.add(Mon_scan.nextLine());
         }
         
-        Class_class c1 = new Class_class();
-        Class_class c2 = new Class_class();
-        Class_class c3 = new Class_class();
-        Class_class c4 = new Class_class();
-        Class_class c5 = new Class_class();
-        Class_class c6 = new Class_class();
-        Class_class c7 = new Class_class();
+        Class_class c1M = new Class_class();
+        Class_class c2M = new Class_class();
+        Class_class c3M = new Class_class();
+        Class_class c4M = new Class_class();
+        Class_class c5M = new Class_class();
+        Class_class c6M = new Class_class();
+        Class_class c7M = new Class_class();
         
         ArrayList<Class_class> MondayClasses = new ArrayList<Class_class>();
-        MondayClasses.add(c1);
-        MondayClasses.add(c2);
-        MondayClasses.add(c3);
-        MondayClasses.add(c4);
-        MondayClasses.add(c5);
-        MondayClasses.add(c6);
-        MondayClasses.add(c7);
+        MondayClasses.add(c1M);
+        MondayClasses.add(c2M);
+        MondayClasses.add(c3M);
+        MondayClasses.add(c4M);
+        MondayClasses.add(c5M);
+        MondayClasses.add(c6M);
+        MondayClasses.add(c7M);
         
         int count = 0;
         for(String currentLine: infoMondayByString){
@@ -95,66 +98,118 @@ class  create
             //System.out.println("current slot: "+slot);
             
             if(Character.toLowerCase(slot) == rightSlot){
-                MondayClasses.get(count).cName(className);
-                MondayClasses.get(count).cStartTime(startTime);
-                MondayClasses.get(count).cEndTime(endTime);
-                MondayClasses.get(count).cLocation(location);
-                MondayClasses.get(count).cSlot(slot);
-                MondayClasses.get(count).cTeacher(teacher);
-                MondayClasses.get(count).cPosition(count+1);
+                MondayClasses.get(count).cAll(className, startTime, endTime, location, slot, teacher, count+1);
            }
            else if(Character.toLowerCase(slot) == MondaySlots[count+1]){
-               MondayClasses.get(count+1).cName(className);
-               MondayClasses.get(count+1).cStartTime(startTime);
-               MondayClasses.get(count+1).cEndTime(endTime);
-               MondayClasses.get(count+1).cLocation(location);
-               MondayClasses.get(count+1).cSlot(slot);
-               MondayClasses.get(count+1).cTeacher(teacher);
-               MondayClasses.get(count+1).cPosition(count+2);
+               MondayClasses.get(count+1).cAll(className, startTime, endTime, location, slot, teacher, count+2);
                count++;
            }
            else if(Character.toLowerCase(slot) == MondaySlots[count+2]){
-               MondayClasses.get(count+2).cName(className);
-               MondayClasses.get(count+2).cStartTime(startTime);
-               MondayClasses.get(count+2).cEndTime(endTime);
-               MondayClasses.get(count+2).cLocation(location);
-               MondayClasses.get(count+2).cSlot(slot);
-               MondayClasses.get(count+2).cTeacher(teacher);
-               MondayClasses.get(count+2).cPosition(count+3);
+               MondayClasses.get(count+2).cAll(className, startTime, endTime, location, slot, teacher, count+3);
                count+=2;
            }
            else if(Character.toLowerCase(slot) == MondaySlots[count+3]){
-               MondayClasses.get(count+3).cName(className);
-               MondayClasses.get(count+3).cStartTime(startTime);
-               MondayClasses.get(count+3).cEndTime(endTime);
-               MondayClasses.get(count+3).cLocation(location);
-               MondayClasses.get(count+3).cSlot(slot);
-               MondayClasses.get(count+3).cTeacher(teacher);
-               MondayClasses.get(count+3).cPosition(count+4);
+               MondayClasses.get(count+3).cAll(className, startTime, endTime, location, slot, teacher, count+4);
+               count+=3;
+           }
+           else if(Character.toLowerCase(slot) == MondaySlots[count+4]){
+               MondayClasses.get(count+4).cAll(className, startTime, endTime, location, slot, teacher, count+5);
+               count+=4;
+           }
+            count++;
+        }
+        //System.out.println("counter: "+count);
+        System.out.println("CLASS POSITIONS: ");
+        System.out.print(c1M.getPosition());
+        System.out.print(c2M.getPosition());
+        System.out.print(c3M.getPosition());
+        System.out.print(c4M.getPosition());
+        System.out.print(c5M.getPosition());
+        System.out.print(c6M.getPosition());
+        System.out.print(c7M.getPosition());
+        System.out.println();
+        System.out.println();
+        
+        Day Monday = new Day(c1M, c2M, c3M, c4M, c5M, c6M, c7M);
+        // MONDAY CODE BLOCK END
+        
+        //TUESDAY CODE BLOCK START----------------------------------------------------------------------------
+        
+        char[] TuesdaySlots = {'d','a','e','h','b','f','c'};
+        String infoTuesday = infoStudent.substring(infoStudent.indexOf("Tuesday")+77, infoStudent.indexOf("Wednesday"));
+        Scanner Tue_scan = new Scanner(infoTuesday);
+        
+        //how many courses on Tuesday
+        ArrayList<String> infoTuesdayByString = new ArrayList<String>();
+        
+        while(Tue_scan.hasNextLine()){
+            infoTuesdayByString.add(Tue_scan.nextLine());
+        }
+        
+        Class_class c1TUE = new Class_class();
+        Class_class c2TUE = new Class_class();
+        Class_class c3TUE = new Class_class();
+        Class_class c4TUE = new Class_class();
+        Class_class c5TUE = new Class_class();
+        Class_class c6TUE = new Class_class();
+        Class_class c7TUE = new Class_class();
+        
+        ArrayList<Class_class> TuesdayClasses = new ArrayList<Class_class>();
+        TuesdayClasses.add(c1TUE);
+        TuesdayClasses.add(c2TUE);
+        TuesdayClasses.add(c3TUE);
+        TuesdayClasses.add(c4TUE);
+        TuesdayClasses.add(c5TUE);
+        TuesdayClasses.add(c6TUE);
+        TuesdayClasses.add(c7TUE);
+        
+        count = 0;
+        for(String currentLine: infoTuesdayByString){
+            char rightSlot = TuesdaySlots[count];
+            
+            System.out.println(currentLine);
+            String[] input = currentLine.split(",");
+            String className = input[0];
+            String startTime = input[1];
+            String endTime = input[2];
+            String location = input[3];
+            char slot = input[4].charAt(0);
+            String teacher = input[5];
+            
+            //System.out.println("rightSlot: "+rightSlot);
+            //System.out.println("current slot: "+slot);
+            
+            if(Character.toLowerCase(slot) == rightSlot){
+                TuesdayClasses.get(count).cAll(className, startTime, endTime, location, slot, teacher, count+1);
+           }
+           else if(Character.toLowerCase(slot) == TuesdaySlots[count+1]){
+               TuesdayClasses.get(count+1).cAll(className, startTime, endTime, location, slot, teacher, count+2);
+               count++;
+           }
+           else if(Character.toLowerCase(slot) == TuesdaySlots[count+2]){
+               TuesdayClasses.get(count+2).cAll(className, startTime, endTime, location, slot, teacher, count+3);
+               count+=2;
+           }
+           else if(Character.toLowerCase(slot) == TuesdaySlots[count+3]){
+               TuesdayClasses.get(count+3).cAll(className, startTime, endTime, location, slot, teacher, count+4);
                count+=3;
            }
             count++;
         }
         //System.out.println("counter: "+count);
-        
-        
         System.out.println("CLASS POSITIONS: ");
-        System.out.print(c1.getPosition());
-        System.out.print(c2.getPosition());
-        System.out.print(c3.getPosition());
-        System.out.print(c4.getPosition());
-        System.out.print(c5.getPosition());
-        System.out.print(c6.getPosition());
-        System.out.print(c7.getPosition());
+        System.out.print(c1TUE.getPosition());
+        System.out.print(c2TUE.getPosition());
+        System.out.print(c3TUE.getPosition());
+        System.out.print(c4TUE.getPosition());
+        System.out.print(c5TUE.getPosition());
+        System.out.print(c6TUE.getPosition());
+        System.out.print(c7TUE.getPosition());
         System.out.println();
         System.out.println();
         
-        
-        
-        
-        
-        
-        
+        Day Tuesday = new Day(c1TUE, c2TUE, c3TUE, c4TUE, c5TUE, c6TUE, c7TUE);
+        // TUESDAY CODE BLOCK END
     }
   }
   
