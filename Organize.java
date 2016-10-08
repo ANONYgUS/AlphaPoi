@@ -505,9 +505,10 @@ public class Organize
         MASTER.add(sophomores);
         MASTER.add(juniors);
         MASTER.add(seniors);
+        
+        
         create create_obj = new create(MASTER);
-        create_obj.printStudentSchedule("Kniesche, Niklas");
-        create_obj.printStudentSchedule("Lee, Augustus");
+        create_obj.printClassSchedule("11");
     }
     
     
