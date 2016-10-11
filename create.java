@@ -384,6 +384,37 @@ class  create
     }
   }
   
+  public void addClass (String studentName, Class_class c1){
+	  
+	/**
+	make char arrays for slots in order for days, for each day of the week;
+	
+	for each student
+		if (names match)
+			for each day
+				for each class
+					if (slots match up, and the original slot is empty)
+						add c1 in to the spot
+				
+	*/	
+	
+	char[] MondaySlots = {'c','a','d','h','b','g','e'};
+	char[] TuesdaySlots = {'d','a','e','h','b','f','c'};
+	char[] WednesdaySlots = {'e','a','f','h','b','c','g'};
+	char[] ThursdaySlots = {'f','a','m','z','g','b','c','d'};
+	char[] FridaySlots = {'g','a','e','h','b','d','f'};
+	
+	for(ArrayList<Student> x : bob){
+          for(Student y : x){
+			  if (y.getName().equals(studentName)){
+				  
+			  }
+			  }
+		  }
+	}
+	  
+  }
+  
   public void writeToCell(String fn, int r, int c, String str) throws Exception{
     try{
     
