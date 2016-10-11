@@ -92,7 +92,7 @@ public class Organize
                 //System.out.println(currentLine);
                 String[] input = currentLine.split(",");
                 //class names have id's in them... this removes them from the schedule, so that the classname is shorter and fits better on the cell.
-                String className = input[0].substring(0, input[0].indexOf("("));
+                String className = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
                 String location = input[3];
@@ -175,7 +175,7 @@ public class Organize
                 
                 //System.out.println(currentLine);
                 String[] input = currentLine.split(",");
-                String className = input[0].substring(0, input[0].indexOf("("));
+                String className = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
                 String location = input[3];
@@ -254,7 +254,7 @@ public class Organize
                 
                 //System.out.println(currentLine);
                 String[] input = currentLine.split(",");
-                String className = input[0].substring(0, input[0].indexOf("("));
+                String className = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
                 String location = input[3];
@@ -335,7 +335,7 @@ public class Organize
                 
                 //System.out.println(currentLine);
                 String[] input = currentLine.split(",");
-                String className = input[0].substring(0, input[0].indexOf("("));
+                String className = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
                 String location = input[3];
@@ -423,7 +423,7 @@ public class Organize
                 
                 //System.out.println(currentLine);
                 String[] input = currentLine.split(",");
-                String className = input[0].substring(0, input[0].indexOf("("));
+                String className = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
                 String location = input[3];
@@ -509,7 +509,7 @@ public class Organize
         
         
         create create_obj = new create(MASTER);
-        create_obj.printClassSchedule("10");
+        create_obj.printClassSchedule("11");
     }
     
     
