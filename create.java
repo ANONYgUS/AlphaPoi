@@ -177,6 +177,9 @@ class  create
       }
   }
   
+  
+  //instead of using the writeToCell method, it probably is faster to type this process out each time.
+  //This will most likely increase code speed because the file isn't opened and closed each time a single cell is modified.
   public void writeToCell(String fn, int r, int c, String str) throws Exception{
     try{
     
