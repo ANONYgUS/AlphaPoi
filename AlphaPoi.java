@@ -547,156 +547,164 @@ class  AlphaPoi
                   Workbook wb = WorkbookFactory.create(inp);
                   Sheet sheet = wb.getSheetAt(0);
                   FileOutputStream fileOut = new FileOutputStream(SNAME);
-                
+                  
+                  //name and grade
+                  Row row = sheet.getRow(0);
+                  Cell cell = row.getCell(0);
+                  cell.setCellValue(y.getFullName().substring(y.getFullName().indexOf(",")+1)+" "+y.getFullName().substring(0, y.getFullName().indexOf(",")));
+                  
+                  row = sheet.getRow(0);
+                  cell = row.getCell(4);
+                  cell.setCellValue("Grade: "+y.getGrade());
+                  
                   //MONDAY
-                  Row row = sheet.getRow(4);
-                  Cell cell = row.getCell(1);
-                  cell.setCellValue(y.getMonday().getCourse(0).getName()+"\n");
-                  
-                  row = sheet.getRow(15);
+                  row = sheet.getRow(5);
                   cell = row.getCell(1);
-                  cell.setCellValue(y.getMonday().getCourse(1).getName()+"\n");
+                  cell.setCellValue(y.getMonday().getCourse(0).getName()+"\n"+y.getMonday().getCourse(0).getLocation());
                   
-                  row = sheet.getRow(26);
+                  row = sheet.getRow(16);
                   cell = row.getCell(1);
-                  cell.setCellValue(y.getMonday().getCourse(2).getName()+"\n");
+                  cell.setCellValue(y.getMonday().getCourse(1).getName()+"\n"+y.getMonday().getCourse(1).getLocation());
                   
-                  row = sheet.getRow(44);
+                  row = sheet.getRow(27);
                   cell = row.getCell(1);
-                  cell.setCellValue(y.getMonday().getCourse(3).getName()+"\n");
+                  cell.setCellValue(y.getMonday().getCourse(2).getName()+"\n"+y.getMonday().getCourse(2).getLocation());
                   
-                  row = sheet.getRow(55);
+                  row = sheet.getRow(45);
                   cell = row.getCell(1);
-                  cell.setCellValue(y.getMonday().getCourse(4).getName()+"\n");
+                  cell.setCellValue(y.getMonday().getCourse(3).getName()+"\n"+y.getMonday().getCourse(3).getLocation());
                   
-                  row = sheet.getRow(66);
+                  row = sheet.getRow(56);
                   cell = row.getCell(1);
-                  cell.setCellValue(y.getMonday().getCourse(5).getName()+"\n");
+                  cell.setCellValue(y.getMonday().getCourse(4).getName()+"\n"+y.getMonday().getCourse(4).getLocation());
                   
-                  row = sheet.getRow(77);
+                  row = sheet.getRow(67);
                   cell = row.getCell(1);
-                  cell.setCellValue(y.getMonday().getCourse(6).getName()+"\n");
+                  cell.setCellValue(y.getMonday().getCourse(5).getName()+"\n"+y.getMonday().getCourse(5).getLocation());
+                  
+                  row = sheet.getRow(78);
+                  cell = row.getCell(1);
+                  cell.setCellValue(y.getMonday().getCourse(6).getName()+"\n"+y.getMonday().getCourse(6).getLocation());
                   
                   //TUESDAY
-                  row = sheet.getRow(4);
+                  row = sheet.getRow(5);
                   cell = row.getCell(2);
-                  cell.setCellValue(y.getTuesday().getCourse(0).getName()+"\n");
+                  cell.setCellValue(y.getTuesday().getCourse(0).getName()+"\n"+y.getTuesday().getCourse(0).getLocation());
                   
-                  row = sheet.getRow(15);
+                  row = sheet.getRow(16);
                   cell = row.getCell(2);
-                  cell.setCellValue(y.getTuesday().getCourse(1).getName()+"\n");
+                  cell.setCellValue(y.getTuesday().getCourse(1).getName()+"\n"+y.getTuesday().getCourse(1).getLocation());
                   
-                  row = sheet.getRow(26);
+                  row = sheet.getRow(27);
                   cell = row.getCell(2);
-                  cell.setCellValue(y.getTuesday().getCourse(2).getName()+"\n");
+                  cell.setCellValue(y.getTuesday().getCourse(2).getName()+"\n"+y.getTuesday().getCourse(2).getLocation());
                   
-                  row = sheet.getRow(44);
+                  row = sheet.getRow(45);
                   cell = row.getCell(2);
-                  cell.setCellValue(y.getTuesday().getCourse(3).getName()+"\n");
+                  cell.setCellValue(y.getTuesday().getCourse(3).getName()+"\n"+y.getTuesday().getCourse(3).getLocation());
 
-                  row = sheet.getRow(55);
+                  row = sheet.getRow(56);
                   cell = row.getCell(2);
-                  cell.setCellValue(y.getTuesday().getCourse(4).getName()+"\n");
+                  cell.setCellValue(y.getTuesday().getCourse(4).getName()+"\n"+y.getTuesday().getCourse(4).getLocation());
 
-                  row = sheet.getRow(66);
+                  row = sheet.getRow(67);
                   cell = row.getCell(2);
-                  cell.setCellValue(y.getTuesday().getCourse(5).getName()+"\n");
-
-                  row = sheet.getRow(77);
-                  cell = row.getCell(2);
-                  cell.setCellValue(y.getTuesday().getCourse(6).getName()+"\n");
-
-                  //WEDNESDAY
-                  row = sheet.getRow(4);
-                  cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(0).getName()+"\n");
-
-                  row = sheet.getRow(15);
-                  cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(1).getName()+"\n");
-
-                  row = sheet.getRow(26);
-                  cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(2).getName()+"\n");
-
-                  row = sheet.getRow(44);
-                  cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(3).getName()+"\n");
-
-                  row = sheet.getRow(55);
-                  cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n");
-                  //wb.write(fileOut);
-                  
-                  row = sheet.getRow(66);
-                  cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n");
-
-                  row = sheet.getRow(77);
-                  cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n");
-
-                  //THURSDAY
-                  row = sheet.getRow(1);
-                  cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(0).getName()+"\n");
-
-                  row = sheet.getRow(11);
-                  cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(1).getName()+"\n");
-
-                  row = sheet.getRow(20);
-                  cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(2).getName()+"\n");
-
-                  row = sheet.getRow(29);
-                  cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(3).getName()+"\n");
-
-                  row = sheet.getRow(48);
-                  cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(4).getName()+"\n");
- 
-                  row = sheet.getRow(58);
-                  cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(5).getName()+"\n");
-
-                  row = sheet.getRow(68);
-                  cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(6).getName()+"\n");
+                  cell.setCellValue(y.getTuesday().getCourse(5).getName()+"\n"+y.getTuesday().getCourse(5).getLocation());
 
                   row = sheet.getRow(78);
+                  cell = row.getCell(2);
+                  cell.setCellValue(y.getTuesday().getCourse(6).getName()+"\n"+y.getTuesday().getCourse(6).getLocation());
+
+                  //WEDNESDAY
+                  row = sheet.getRow(5);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(0).getName()+"\n"+y.getWednesday().getCourse(0).getLocation());
+
+                  row = sheet.getRow(16);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(1).getName()+"\n"+y.getWednesday().getCourse(1).getLocation());
+
+                  row = sheet.getRow(27);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(2).getName()+"\n"+y.getWednesday().getCourse(2).getLocation());
+
+                  row = sheet.getRow(45);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(3).getName()+"\n"+y.getWednesday().getCourse(3).getLocation());
+
+                  row = sheet.getRow(56);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n"+y.getWednesday().getCourse(4).getLocation());
+                  
+                  row = sheet.getRow(67);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n"+y.getWednesday().getCourse(5).getLocation());
+
+                  row = sheet.getRow(78);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n"+y.getWednesday().getCourse(6).getLocation());
+
+                  //THURSDAY
+                  row = sheet.getRow(2);
                   cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(7).getName()+"\n");
+                  cell.setCellValue(y.getThursday().getCourse(0).getName()+"\n"+y.getThursday().getCourse(0).getLocation());
+
+                  row = sheet.getRow(12);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(1).getName()+"\n"+y.getThursday().getCourse(1).getLocation());
+
+                  row = sheet.getRow(21);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(2).getName()+"\n"+y.getThursday().getCourse(2).getLocation());
+
+                  row = sheet.getRow(30);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(3).getName()+"\n"+y.getThursday().getCourse(3).getLocation());
+
+                  row = sheet.getRow(49);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(4).getName()+"\n"+y.getThursday().getCourse(4).getLocation());
+ 
+                  row = sheet.getRow(59);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(5).getName()+"\n"+y.getThursday().getCourse(5).getLocation());
+
+                  row = sheet.getRow(69);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(6).getName()+"\n"+y.getThursday().getCourse(6).getLocation());
+
+                  row = sheet.getRow(79);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(7).getName()+"\n"+y.getThursday().getCourse(7).getLocation());
 
                   //FRIDAY
-                  row = sheet.getRow(4);
+                  row = sheet.getRow(5);
                   cell = row.getCell(5);
-                  cell.setCellValue(y.getFriday().getCourse(0).getName()+"\n");
+                  cell.setCellValue(y.getFriday().getCourse(0).getName()+"\n"+y.getFriday().getCourse(0).getLocation());
 
-                  row = sheet.getRow(15);
+                  row = sheet.getRow(16);
                   cell = row.getCell(5);
-                  cell.setCellValue(y.getFriday().getCourse(1).getName()+"\n");
+                  cell.setCellValue(y.getFriday().getCourse(1).getName()+"\n"+y.getFriday().getCourse(1).getLocation());
 
-                  row = sheet.getRow(26);
+                  row = sheet.getRow(27);
                   cell = row.getCell(5);
-                  cell.setCellValue(y.getFriday().getCourse(2).getName()+"\n");
+                  cell.setCellValue(y.getFriday().getCourse(2).getName()+"\n"+y.getFriday().getCourse(2).getLocation());
 
-                  row = sheet.getRow(44);
+                  row = sheet.getRow(45);
                   cell = row.getCell(5);
-                  cell.setCellValue(y.getFriday().getCourse(3).getName()+"\n");
+                  cell.setCellValue(y.getFriday().getCourse(3).getName()+"\n"+y.getFriday().getCourse(3).getLocation());
 
-                  row = sheet.getRow(55);
+                  row = sheet.getRow(56);
                   cell = row.getCell(5);
-                  cell.setCellValue(y.getFriday().getCourse(4).getName()+"\n");
+                  cell.setCellValue(y.getFriday().getCourse(4).getName()+"\n"+y.getFriday().getCourse(4).getLocation());
 
-                  row = sheet.getRow(66);
+                  row = sheet.getRow(67);
                   cell = row.getCell(5);
-                  cell.setCellValue(y.getFriday().getCourse(5).getName()+"\n");
+                  cell.setCellValue(y.getFriday().getCourse(5).getName()+"\n"+y.getFriday().getCourse(5).getLocation());
 
-                  row = sheet.getRow(77);
+                  row = sheet.getRow(78);
                   cell = row.getCell(5);
-                  cell.setCellValue(y.getFriday().getCourse(6).getName()+"\n");
+                  cell.setCellValue(y.getFriday().getCourse(6).getName()+"\n"+y.getFriday().getCourse(6).getLocation());
                   
                   //write changes and close fileOut
                   wb.write(fileOut);   
@@ -744,155 +752,163 @@ class  AlphaPoi
           Sheet sheet = wb.getSheetAt(0);
           FileOutputStream fileOut = new FileOutputStream(SNAME);
           
+          //name and grade
+          Row row = sheet.getRow(0);
+          Cell cell = row.getCell(0);
+          cell.setCellValue(y.getFullName().substring(y.getFullName().indexOf(",")+1)+" "+y.getFullName().substring(0, y.getFullName().indexOf(",")));
+          
+          row = sheet.getRow(0);
+          cell = row.getCell(3);
+          cell.setCellValue("Grade: "+y.getGrade());
+          
           //MONDAY
-          Row row = sheet.getRow(4);
-          Cell cell = row.getCell(1);
-          cell.setCellValue(y.getMonday().getCourse(0).getName()+"\n");
-          
-          row = sheet.getRow(15);
+          row = sheet.getRow(5);
           cell = row.getCell(1);
-          cell.setCellValue(y.getMonday().getCourse(1).getName()+"\n");
+          cell.setCellValue(y.getMonday().getCourse(0).getName()+"\n"+y.getMonday().getCourse(0).getLocation());
           
-          row = sheet.getRow(26);
+          row = sheet.getRow(16);
           cell = row.getCell(1);
-          cell.setCellValue(y.getMonday().getCourse(2).getName()+"\n");
+          cell.setCellValue(y.getMonday().getCourse(1).getName()+"\n"+y.getMonday().getCourse(1).getLocation());
           
-          row = sheet.getRow(44);
+          row = sheet.getRow(27);
           cell = row.getCell(1);
-          cell.setCellValue(y.getMonday().getCourse(3).getName()+"\n");
+          cell.setCellValue(y.getMonday().getCourse(2).getName()+"\n"+y.getMonday().getCourse(2).getLocation());
           
-          row = sheet.getRow(55);
+          row = sheet.getRow(45);
           cell = row.getCell(1);
-          cell.setCellValue(y.getMonday().getCourse(4).getName()+"\n");
+          cell.setCellValue(y.getMonday().getCourse(3).getName()+"\n"+y.getMonday().getCourse(3).getLocation());
           
-          row = sheet.getRow(66);
+          row = sheet.getRow(56);
           cell = row.getCell(1);
-          cell.setCellValue(y.getMonday().getCourse(5).getName()+"\n");
+          cell.setCellValue(y.getMonday().getCourse(4).getName()+"\n"+y.getMonday().getCourse(4).getLocation());
           
-          row = sheet.getRow(77);
+          row = sheet.getRow(67);
           cell = row.getCell(1);
-          cell.setCellValue(y.getMonday().getCourse(6).getName()+"\n");
+          cell.setCellValue(y.getMonday().getCourse(5).getName()+"\n"+y.getMonday().getCourse(5).getLocation());
+          
+          row = sheet.getRow(78);
+          cell = row.getCell(1);
+          cell.setCellValue(y.getMonday().getCourse(6).getName()+"\n"+y.getMonday().getCourse(6).getLocation());
           
           //TUESDAY
-          row = sheet.getRow(4);
+          row = sheet.getRow(5);
           cell = row.getCell(2);
-          cell.setCellValue(y.getTuesday().getCourse(0).getName()+"\n");
+          cell.setCellValue(y.getTuesday().getCourse(0).getName()+"\n"+y.getTuesday().getCourse(0).getLocation());
           
-          row = sheet.getRow(15);
+          row = sheet.getRow(16);
           cell = row.getCell(2);
-          cell.setCellValue(y.getTuesday().getCourse(1).getName()+"\n");
+          cell.setCellValue(y.getTuesday().getCourse(1).getName()+"\n"+y.getTuesday().getCourse(1).getLocation());
           
-          row = sheet.getRow(26);
+          row = sheet.getRow(27);
           cell = row.getCell(2);
-          cell.setCellValue(y.getTuesday().getCourse(2).getName()+"\n");
+          cell.setCellValue(y.getTuesday().getCourse(2).getName()+"\n"+y.getTuesday().getCourse(2).getLocation());
           
-          row = sheet.getRow(44);
+          row = sheet.getRow(45);
           cell = row.getCell(2);
-          cell.setCellValue(y.getTuesday().getCourse(3).getName()+"\n");
+          cell.setCellValue(y.getTuesday().getCourse(3).getName()+"\n"+y.getTuesday().getCourse(3).getLocation());
 
-          row = sheet.getRow(55);
+          row = sheet.getRow(56);
           cell = row.getCell(2);
-          cell.setCellValue(y.getTuesday().getCourse(4).getName()+"\n");
+          cell.setCellValue(y.getTuesday().getCourse(4).getName()+"\n"+y.getTuesday().getCourse(4).getLocation());
 
-          row = sheet.getRow(66);
+          row = sheet.getRow(67);
           cell = row.getCell(2);
-          cell.setCellValue(y.getTuesday().getCourse(5).getName()+"\n");
-
-          row = sheet.getRow(77);
-          cell = row.getCell(2);
-          cell.setCellValue(y.getTuesday().getCourse(6).getName()+"\n");
-
-          //WEDNESDAY
-          row = sheet.getRow(4);
-          cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(0).getName()+"\n");
-
-          row = sheet.getRow(15);
-          cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(1).getName()+"\n");
-
-          row = sheet.getRow(26);
-          cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(2).getName()+"\n");
-
-          row = sheet.getRow(44);
-          cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(3).getName()+"\n");
-
-          row = sheet.getRow(55);
-          cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n");
-          //wb.write(fileOut);
-          
-          row = sheet.getRow(66);
-          cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n");
-
-          row = sheet.getRow(77);
-          cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n");
-
-          //THURSDAY
-          row = sheet.getRow(1);
-          cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(0).getName()+"\n");
-
-          row = sheet.getRow(11);
-          cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(1).getName()+"\n");
-
-          row = sheet.getRow(20);
-          cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(2).getName()+"\n");
-
-          row = sheet.getRow(29);
-          cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(3).getName()+"\n");
-
-          row = sheet.getRow(48);
-          cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(4).getName()+"\n");
-
-          row = sheet.getRow(58);
-          cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(5).getName()+"\n");
-
-          row = sheet.getRow(68);
-          cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(6).getName()+"\n");
+          cell.setCellValue(y.getTuesday().getCourse(5).getName()+"\n"+y.getTuesday().getCourse(5).getLocation());
 
           row = sheet.getRow(78);
+          cell = row.getCell(2);
+          cell.setCellValue(y.getTuesday().getCourse(6).getName()+"\n"+y.getTuesday().getCourse(6).getLocation());
+
+          //WEDNESDAY
+          row = sheet.getRow(5);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(0).getName()+"\n"+y.getWednesday().getCourse(0).getLocation());
+
+          row = sheet.getRow(16);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(1).getName()+"\n"+y.getWednesday().getCourse(1).getLocation());
+
+          row = sheet.getRow(27);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(2).getName()+"\n"+y.getWednesday().getCourse(2).getLocation());
+
+          row = sheet.getRow(45);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(3).getName()+"\n"+y.getWednesday().getCourse(3).getLocation());
+
+          row = sheet.getRow(56);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n"+y.getWednesday().getCourse(4).getLocation());
+          
+          row = sheet.getRow(67);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n"+y.getWednesday().getCourse(5).getLocation());
+
+          row = sheet.getRow(78);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n"+y.getWednesday().getCourse(6).getLocation());
+
+          //THURSDAY
+          row = sheet.getRow(2);
           cell = row.getCell(4);
-          cell.setCellValue(y.getThursday().getCourse(7).getName()+"\n");
+          cell.setCellValue(y.getThursday().getCourse(0).getName()+"\n"+y.getThursday().getCourse(0).getLocation());
+
+          row = sheet.getRow(12);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(1).getName()+"\n"+y.getThursday().getCourse(1).getLocation());
+
+          row = sheet.getRow(21);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(2).getName()+"\n"+y.getThursday().getCourse(2).getLocation());
+
+          row = sheet.getRow(30);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(3).getName()+"\n"+y.getThursday().getCourse(3).getLocation());
+
+          row = sheet.getRow(49);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(4).getName()+"\n"+y.getThursday().getCourse(4).getLocation());
+
+          row = sheet.getRow(59);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(5).getName()+"\n"+y.getThursday().getCourse(5).getLocation());
+
+          row = sheet.getRow(69);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(6).getName()+"\n"+y.getThursday().getCourse(6).getLocation());
+
+          row = sheet.getRow(79);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(7).getName()+"\n"+y.getThursday().getCourse(7).getLocation());
 
           //FRIDAY
-          row = sheet.getRow(4);
+          row = sheet.getRow(5);
           cell = row.getCell(5);
-          cell.setCellValue(y.getFriday().getCourse(0).getName()+"\n");
+          cell.setCellValue(y.getFriday().getCourse(0).getName()+"\n"+y.getFriday().getCourse(0).getLocation());
 
-          row = sheet.getRow(15);
+          row = sheet.getRow(16);
           cell = row.getCell(5);
-          cell.setCellValue(y.getFriday().getCourse(1).getName()+"\n");
+          cell.setCellValue(y.getFriday().getCourse(1).getName()+"\n"+y.getFriday().getCourse(1).getLocation());
 
-          row = sheet.getRow(26);
+          row = sheet.getRow(27);
           cell = row.getCell(5);
-          cell.setCellValue(y.getFriday().getCourse(2).getName()+"\n");
+          cell.setCellValue(y.getFriday().getCourse(2).getName()+"\n"+y.getFriday().getCourse(2).getLocation());
 
-          row = sheet.getRow(44);
+          row = sheet.getRow(45);
           cell = row.getCell(5);
-          cell.setCellValue(y.getFriday().getCourse(3).getName()+"\n");
+          cell.setCellValue(y.getFriday().getCourse(3).getName()+"\n"+y.getFriday().getCourse(3).getLocation());
 
-          row = sheet.getRow(55);
+          row = sheet.getRow(56);
           cell = row.getCell(5);
-          cell.setCellValue(y.getFriday().getCourse(4).getName()+"\n");
+          cell.setCellValue(y.getFriday().getCourse(4).getName()+"\n"+y.getFriday().getCourse(4).getLocation());
 
-          row = sheet.getRow(66);
+          row = sheet.getRow(67);
           cell = row.getCell(5);
-          cell.setCellValue(y.getFriday().getCourse(5).getName()+"\n");
+          cell.setCellValue(y.getFriday().getCourse(5).getName()+"\n"+y.getFriday().getCourse(5).getLocation());
 
-          row = sheet.getRow(77);
+          row = sheet.getRow(78);
           cell = row.getCell(5);
-          cell.setCellValue(y.getFriday().getCourse(6).getName()+"\n");
+          cell.setCellValue(y.getFriday().getCourse(6).getName()+"\n"+y.getFriday().getCourse(6).getLocation());
           
           //write changes and close fileOut
           wb.write(fileOut);   
@@ -1076,33 +1092,17 @@ class  AlphaPoi
     }
   }
   
-  public void addCourse(String studentName, Course c1){
-      
-    /**
-    make char arrays for slots in order for days, for each day of the week;
-    
-    for each student
-        if (names match)
-            for each day
-                for each course
-                    if (slots match up, and the original slot is empty)
-                        add c1 in to the spot
-                
-    */  
-    
-    char[] MondaySlots = {'c','a','d','h','b','g','e'};
-    char[] TuesdaySlots = {'d','a','e','h','b','f','c'};
-    char[] WednesdaySlots = {'e','a','f','h','b','c','g'};
-    char[] ThursdaySlots = {'f','a','m','z','g','b','c','d'};
-    char[] FridaySlots = {'g','a','e','h','b','d','f'};
-    
-    for(ArrayList<Student> x : bob){
-           for(Student y : x){
-              if (y.getFullName().equals(studentName)){
-                  
-              }
-              }
-          }
-    }  
+  public void addCourse(String studentName, String newCourse, char courseSlot){
+     //the old course is a free so its courseName is an empty String. Therefore the switchClass method works fine here.
+     switchCourses(studentName, "", newCourse, courseSlot);
+  }
+  
+  //goes through each slot and repeats the same method
+  public void addCourse(String studentName, String newCourse){
+     char[] allSlots = {'C','A','D','H','B','G','E','F'};
+     for(char x : allSlots){
+         switchCourses(studentName, "", newCourse, x);
+     }
+  } 
   
 }

@@ -4,43 +4,43 @@ public class Day {
 	
 	//instance variables
 	
-	//7 classes per day on normal days
-	private Class_class class1;
-	private Class_class class2;
-	private Class_class class3;
-	private Class_class class4;
-	private Class_class class5;
-	private Class_class class6;
-	private Class_class class7;
+	//7 courses per day on normal days
+	private Course course1;
+	private Course course2;
+	private Course course3;
+	private Course course4;
+	private Course course5;
+	private Course course6;
+	private Course course7;
 	
-	ArrayList<Class_class> classes = new ArrayList<Class_class>();
+	ArrayList<Course> courses = new ArrayList<Course>();
 	
 	//constructor
-	public Day(Class_class c1, Class_class c2, Class_class c3, Class_class c4, Class_class c5, Class_class c6, Class_class c7){
-		class1 = c1;
-		class2 = c2;
-		class3 = c3;
-		class4 = c4;
-		class5 = c5;
-		class6 = c6;
-		class7 = c7;
+	public Day(Course c1, Course c2, Course c3, Course c4, Course c5, Course c6, Course c7){
+		course1 = c1;
+		course2 = c2;
+		course3 = c3;
+		course4 = c4;
+		course5 = c5;
+		course6 = c6;
+		course7 = c7;
 		
-		//put all classes into a array for easier referencing
+		//put all courses into a array for easier referencing
 		
-		classes.add(class1);
-		classes.add(class2);
-		classes.add(class3);
-		classes.add(class4);
-		classes.add(class5);
-		classes.add(class6);
-		classes.add(class7);
+		courses.add(course1);
+		courses.add(course2);
+		courses.add(course3);
+		courses.add(course4);
+		courses.add(course5);
+		courses.add(course6);
+		courses.add(course7);
 	}
 	
 	
 	//methods to retreive information
 	
-	public Class_class getClass(int i){
-		return classes.get(i);
+	public Course getCourse(int i){
+		return courses.get(i);
 	}
 	
 }
