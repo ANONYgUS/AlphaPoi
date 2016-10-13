@@ -1177,16 +1177,52 @@ class  AlphaPoi
 						  y.getMonday().getCourse(i).cPosition(c1.getPosition());
 					  }
 					  
-					  if(MondaySlots.indexOf(slot1) == i &&
-					       y.getMonday().getCourse(i).getSlot() == ''){
+					  if(TuesdaySlots.indexOf(slot1) == i &&
+					       y.getTuesday().getCourse(i).getSlot() == ''){
 						  isClassEmpty = true;
-						  y.getMonday().getCourse(i).cName(c1.getName());
-						  y.getMonday().getCourse(i).cStartTime(c1.getStartTime());
-						  y.getMonday().getCourse(i).cEndTime(c1.getEndTime());
-						  y.getMonday().getCourse(i).cLocation(c1.getLocation());
-						  y.getMonday().getCourse(i).cSlot(c1.getSlot());
-						  y.getMonday().getCourse(i).cTeacher(c1.getTeacher());
-						  y.getMonday().getCourse(i).cPosition(c1.getPosition());
+						  y.getTuesday().getCourse(i).cName(c1.getName());
+						  y.getTuesday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getTuesday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getTuesday().getCourse(i).cLocation(c1.getLocation());
+						  y.getTuesday().getCourse(i).cSlot(c1.getSlot());
+						  y.getTuesday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getTuesday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+					  if(WednesdaySlots.indexOf(slot1) == i &&
+					       y.getWednesday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getWednesday().getCourse(i).cName(c1.getName());
+						  y.getWednesday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getWednesday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getWednesday().getCourse(i).cLocation(c1.getLocation());
+						  y.getWednesday().getCourse(i).cSlot(c1.getSlot());
+						  y.getWednesday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getWednesday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+					  if(ThursdaySlots.indexOf(slot1) == i &&
+					       y.getThursday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getThursday().getCourse(i).cName(c1.getName());
+						  y.getThursday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getThursday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getThursday().getCourse(i).cLocation(c1.getLocation());
+						  y.getThursday().getCourse(i).cSlot(c1.getSlot());
+						  y.getThursday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getThursday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+					  if(FridaySlots.indexOf(slot1) == i &&
+					       y.getFriday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getFriday().getCourse(i).cName(c1.getName());
+						  y.getFriday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getFriday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getFriday().getCourse(i).cLocation(c1.getLocation());
+						  y.getFriday().getCourse(i).cSlot(c1.getSlot());
+						  y.getFriday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getFriday().getCourse(i).cPosition(c1.getPosition());
 					  }
 					  
 				  }
