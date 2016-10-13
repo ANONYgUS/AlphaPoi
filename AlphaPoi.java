@@ -1092,6 +1092,150 @@ class  AlphaPoi
     }
   }
   
+  public void addClass (String studentName, Class_class c1, char slot1){
+ 	  
+ 	/**
+ 	make char arrays for slots in order for days, for each day of the week;
+ 	
+ 	for each student
+ 		if (names match)
+ 			for each day
+ 				for each class
+ 					if (slots match up, and the original slot is empty)
+ 						add c1 in to the spot
+ 				
+ 	*/	
+ 	
+ 	Arraylist{Character} MondaySlots = new Arraylist{Character}();
+	
+	MondaySlots.add('c');
+	MondaySlots.add('a');
+	MondaySlots.add('d');
+	MondaySlots.add('h');
+	MondaySlots.add('b');
+	MondaySlots.add('g');
+	MondaySlots.add('e');
+	
+ 	Arraylist{Character} TuesdaySlots = new Arraylist{Character}();
+	
+	TuesdaySlots.add('d');
+	TuesdaySlots.add('a');
+	TuesdaySlots.add('e');
+	TuesdaySlots.add('h');
+	TuesdaySlots.add('b');
+	TuesdaySlots.add('f');
+	TuesdaySlots.add('c');
+	
+ 	Arraylist{Character} WednesdaySlots = new Arraylist{Character}();
+	
+	WednesdaySlots.add('e');
+	WednesdaySlots.add('a');
+	WednesdaySlots.add('f');
+	WednesdaySlots.add('h');
+	WednesdaySlots.add('b');
+	WednesdaySlots.add('c');
+	WednesdaySlots.add('g');
+	
+ 	Arraylist{Character} ThursdaySlots = new Arraylist{Character}();
+	
+	ThursdaySlots.add('f');
+	ThursdaySlots.add('a');
+	ThursdaySlots.add('m');
+	ThursdaySlots.add('z');
+	ThursdaySlots.add('g');
+	ThursdaySlots.add('b');
+	ThursdaySlots.add('c');
+	ThursdaySlots.add('d');
+	
+ 	Arraylist{Character} FridaySlots = new Arraylist{Character}();
+ 	
+	FridaySlots.add('g');
+	FridaySlots.add('a');
+	FridaySlots.add('e');
+	FridaySlots.add('h');
+	FridaySlots.add('b');
+	FridaySlots.add('d');
+	FridaySlots.add('f');
+	
+	boolean isClassEmpty = false;
+	
+	
+ 	for(ArrayList<Student> x : bob){
+           for(Student y : x){
+ 			  if (y.getFullName().equals(studentName)){
+				  
+				  for(int i = 0; i < 7; i++){
+					  if(MondaySlots.indexOf(slot1) == i &&
+					       y.getMonday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getMonday().getCourse(i).cName(c1.getName());
+						  y.getMonday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getMonday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getMonday().getCourse(i).cLocation(c1.getLocation());
+						  y.getMonday().getCourse(i).cSlot(c1.getSlot());
+						  y.getMonday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getMonday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+					  if(TuesdaySlots.indexOf(slot1) == i &&
+					       y.getTuesday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getTuesday().getCourse(i).cName(c1.getName());
+						  y.getTuesday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getTuesday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getTuesday().getCourse(i).cLocation(c1.getLocation());
+						  y.getTuesday().getCourse(i).cSlot(c1.getSlot());
+						  y.getTuesday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getTuesday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+					  if(WednesdaySlots.indexOf(slot1) == i &&
+					       y.getWednesday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getWednesday().getCourse(i).cName(c1.getName());
+						  y.getWednesday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getWednesday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getWednesday().getCourse(i).cLocation(c1.getLocation());
+						  y.getWednesday().getCourse(i).cSlot(c1.getSlot());
+						  y.getWednesday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getWednesday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+					  if(ThursdaySlots.indexOf(slot1) == i &&
+					       y.getThursday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getThursday().getCourse(i).cName(c1.getName());
+						  y.getThursday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getThursday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getThursday().getCourse(i).cLocation(c1.getLocation());
+						  y.getThursday().getCourse(i).cSlot(c1.getSlot());
+						  y.getThursday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getThursday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+					  if(FridaySlots.indexOf(slot1) == i &&
+					       y.getFriday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getFriday().getCourse(i).cName(c1.getName());
+						  y.getFriday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getFriday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getFriday().getCourse(i).cLocation(c1.getLocation());
+						  y.getFriday().getCourse(i).cSlot(c1.getSlot());
+						  y.getFriday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getFriday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
+				  }
+ 			  }
+ 			}
+ 		  }
+ 	}  
+	
+	if (!isClassEmpty){
+		System.out.println("there's already a class during that time")
+	}
+
+  
   public void addCourse(String studentName, String newCourse, char courseSlot){
      //the old course is a free so its courseName is an empty String. Therefore the switchClass method works fine here.
      switchCourses(studentName, "", newCourse, courseSlot);
