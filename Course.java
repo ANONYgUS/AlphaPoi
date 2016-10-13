@@ -29,7 +29,7 @@ public class Course{
         startTime = "";
         endTime = "";
         location = "";
-        slot = 'a';
+        slot = 'x';
         teacher = "";
         position = 0;
     }
