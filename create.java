@@ -660,12 +660,57 @@ class  create
  				
  	*/	
  	
- 	char[] MondaySlots = {'c','a','d','h','b','g','e'};
- 	char[] TuesdaySlots = {'d','a','e','h','b','f','c'};
- 	char[] WednesdaySlots = {'e','a','f','h','b','c','g'};
- 	char[] ThursdaySlots = {'f','a','m','z','g','b','c','d'};
- 	char[] FridaySlots = {'g','a','e','h','b','d','f'};
+ 	Arraylist{Character} MondaySlots = new Arraylist{Character}();
+	
+	MondaySlots.add('c');
+	MondaySlots.add('a');
+	MondaySlots.add('d');
+	MondaySlots.add('h');
+	MondaySlots.add('b');
+	MondaySlots.add('g');
+	MondaySlots.add('e');
+	
+ 	Arraylist{Character} TuesdaySlots = new Arraylist{Character}();
+	
+	TuesdaySlots.add('d');
+	TuesdaySlots.add('a');
+	TuesdaySlots.add('e');
+	TuesdaySlots.add('h');
+	TuesdaySlots.add('b');
+	TuesdaySlots.add('f');
+	TuesdaySlots.add('c');
+	
+ 	Arraylist{Character} WednesdaySlots = new Arraylist{Character}();
+	
+	WednesdaySlots.add('e');
+	WednesdaySlots.add('a');
+	WednesdaySlots.add('f');
+	WednesdaySlots.add('h');
+	WednesdaySlots.add('b');
+	WednesdaySlots.add('c');
+	WednesdaySlots.add('g');
+	
+ 	Arraylist{Character} ThursdaySlots = new Arraylist{Character}();
+	
+	ThursdaySlots.add('f');
+	ThursdaySlots.add('a');
+	ThursdaySlots.add('m');
+	ThursdaySlots.add('z');
+	ThursdaySlots.add('g');
+	ThursdaySlots.add('b');
+	ThursdaySlots.add('c');
+	ThursdaySlots.add('d');
+	
+ 	Arraylist{Character} FridaySlots = new Arraylist{Character}();
  	
+	FridaySlots.add('g');
+	FridaySlots.add('a');
+	FridaySlots.add('e');
+	FridaySlots.add('h');
+	FridaySlots.add('b');
+	FridaySlots.add('d');
+	FridaySlots.add('f');
+	
 	boolean isClassEmpty = false;
 	
 	
