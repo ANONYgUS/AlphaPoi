@@ -1236,13 +1236,13 @@ class  AlphaPoi
 	}
 
   
-  public void addCourse(String studentName, String newCourse, char courseSlot){
+  public void addExistingCourse(String studentName, String newCourse, char courseSlot){
      //the old course is a free so its courseName is an empty String. Therefore the switchClass method works fine here.
      switchCourses(studentName, "", newCourse, courseSlot);
   }
   
   //goes through each slot and repeats the same method
-  public void addCourse(String studentName, String newCourse){
+  public void addExistingCourse(String studentName, String newCourse){
      char[] allSlots = {'C','A','D','H','B','G','E','F'};
      for(char x : allSlots){
          switchCourses(studentName, "", newCourse, x);
