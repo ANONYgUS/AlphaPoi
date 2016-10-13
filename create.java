@@ -718,10 +718,31 @@ class  create
            for(Student y : x){
  			  if (y.getFullName().equals(studentName)){
 				  
-				  for(Class_class classs: y.getMonday()){
-					  if(!(MondaySlots.indexOf(classs.getSlot(c1)) == -1)){
+				  for(int i = 0; i < 7; i++){
+					  if(MondaySlots.indexOf(slot1) == i &&
+					       y.getMonday().getCourse(i).getSlot() == ''){
 						  isClassEmpty = true;
+						  y.getMonday().getCourse(i).cName(c1.getName());
+						  y.getMonday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getMonday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getMonday().getCourse(i).cLocation(c1.getLocation());
+						  y.getMonday().getCourse(i).cSlot(c1.getSlot());
+						  y.getMonday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getMonday().getCourse(i).cPosition(c1.getPosition());
 					  }
+					  
+					  if(MondaySlots.indexOf(slot1) == i &&
+					       y.getMonday().getCourse(i).getSlot() == ''){
+						  isClassEmpty = true;
+						  y.getMonday().getCourse(i).cName(c1.getName());
+						  y.getMonday().getCourse(i).cStartTime(c1.getStartTime());
+						  y.getMonday().getCourse(i).cEndTime(c1.getEndTime());
+						  y.getMonday().getCourse(i).cLocation(c1.getLocation());
+						  y.getMonday().getCourse(i).cSlot(c1.getSlot());
+						  y.getMonday().getCourse(i).cTeacher(c1.getTeacher());
+						  y.getMonday().getCourse(i).cPosition(c1.getPosition());
+					  }
+					  
 				  }
  			  }
  			}
