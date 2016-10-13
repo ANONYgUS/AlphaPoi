@@ -758,7 +758,7 @@ class  AlphaPoi
           cell.setCellValue(y.getFullName().substring(y.getFullName().indexOf(",")+1)+" "+y.getFullName().substring(0, y.getFullName().indexOf(",")));
           
           row = sheet.getRow(0);
-          cell = row.getCell(3);
+          cell = row.getCell(4);
           cell.setCellValue("Grade: "+y.getGrade());
           
           //MONDAY
@@ -1106,7 +1106,7 @@ class  AlphaPoi
  				
  	*/	
  	
- 	Arraylist{Character} MondaySlots = new Arraylist{Character}();
+ 	Arraylist<char> MondaySlots = new Arraylist<char>();
 	
 	MondaySlots.add('c');
 	MondaySlots.add('a');
@@ -1116,7 +1116,7 @@ class  AlphaPoi
 	MondaySlots.add('g');
 	MondaySlots.add('e');
 	
- 	Arraylist{Character} TuesdaySlots = new Arraylist{Character}();
+ 	Arraylist<char> TuesdaySlots = new Arraylist<char>();
 	
 	TuesdaySlots.add('d');
 	TuesdaySlots.add('a');
@@ -1126,7 +1126,7 @@ class  AlphaPoi
 	TuesdaySlots.add('f');
 	TuesdaySlots.add('c');
 	
- 	Arraylist{Character} WednesdaySlots = new Arraylist{Character}();
+ 	Arraylist<char> WednesdaySlots = new Arraylist<char>();
 	
 	WednesdaySlots.add('e');
 	WednesdaySlots.add('a');
@@ -1136,7 +1136,7 @@ class  AlphaPoi
 	WednesdaySlots.add('c');
 	WednesdaySlots.add('g');
 	
- 	Arraylist{Character} ThursdaySlots = new Arraylist{Character}();
+ 	Arraylist<char> ThursdaySlots = new Arraylist<char>();
 	
 	ThursdaySlots.add('f');
 	ThursdaySlots.add('a');
@@ -1147,7 +1147,7 @@ class  AlphaPoi
 	ThursdaySlots.add('c');
 	ThursdaySlots.add('d');
 	
- 	Arraylist{Character} FridaySlots = new Arraylist{Character}();
+ 	Arraylist<char> FridaySlots = new Arraylist<char>();
  	
 	FridaySlots.add('g');
 	FridaySlots.add('a');
