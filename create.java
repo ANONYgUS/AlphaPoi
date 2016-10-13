@@ -646,7 +646,7 @@ class  create
     }
   }
   
-  public void addClass (String studentName, Class_class c1){
+  public void addClass (String studentName, Class_class c1, char slot1){
  	  
  	/**
  	make char arrays for slots in order for days, for each day of the week;
@@ -666,14 +666,26 @@ class  create
  	char[] ThursdaySlots = {'f','a','m','z','g','b','c','d'};
  	char[] FridaySlots = {'g','a','e','h','b','d','f'};
  	
+	boolean isClassEmpty = false;
+	
+	
  	for(ArrayList<Student> x : bob){
            for(Student y : x){
  			  if (y.getFullName().equals(studentName)){
- 				  
+				  
+				  for(Class_class classs: y.getMonday()){
+					  if(!(MondaySlots.indexOf(classs.getSlot(c1)) == -1)){
+						  isClassEmpty = true;
+					  }
+				  }
  			  }
- 			  }
+ 			}
  		  }
  	}  
+	
+	if (!isClassEmpty){
+		System.out.println("there's already a class during that time")
+	}
   
   public void writeToCell(String fn, int r, int c, String str) throws Exception{
     try{
