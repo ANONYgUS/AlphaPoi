@@ -15,8 +15,10 @@ public class Gui extends JFrame
         JComboBox cb1 = new JComboBox(obj.getAllCourses());
         cb1.setEditable(true);
         
+        JCheckBox switchSearch = new JCheckBox("Search by first name");
         
         JComboBox studentPicker = new JComboBox(obj.getAllStudents());
+        AutoCompletion.enable(studentPicker);
         studentPicker.setEditable(true);
         JButton b1 = new JButton("Create student schedule");
         b1.addActionListener( new ActionListener()
@@ -46,6 +48,8 @@ public class Gui extends JFrame
         });
         add(b2);
         add(classPicker);
+        
+        JButton b3 = new JButton("Drop a course");
         
         
 

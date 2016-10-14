@@ -16,6 +16,7 @@ class  AlphaPoi
   private ArrayList<ArrayList<Student>> bob;
   Set<String> setOfAllCourses = new HashSet<String>();
   Set<String> setOfAllStudents = new HashSet<String>();
+  Set<String> setOfAllStudentsR = new HashSet<String>();
   
   public AlphaPoi(){
       bob = null;
@@ -51,6 +52,14 @@ class  AlphaPoi
         
         ArrayList<ArrayList<Student>> MASTER = new ArrayList<ArrayList<Student>>();
         
+        //start and end times for normal days
+        String[] rightStartTime = {"8:15", "9:10", "10:05", "11:00", "11:35", "12:30", "1:15", "2:10"};
+        String[] rightEndTime = {"9:05", "10:00", "10:55", "11:30", "12:25", "1:10", "2:05", "3:00"};
+        
+        //start and end times for THURSDAY
+        String[] SrightStartTime = {"8:00", "8:50", "9:40", "10:25", "11:15", "11:50", "12:40", "1:25", "2:15"};
+        String[] SrightEndTime = {"8:45", "9:35", "10:20", "11:15", "11:50", "12:35", "1:20", "2:10", "3:00"};
+        
         for(int i = 0; i<indexesStudent.size(); i++){
             int start = indexesStudent.get(i).intValue();
             int end = 0;
@@ -72,7 +81,10 @@ class  AlphaPoi
             // MONDAY CODE BLOCK START ----------------------------------------------------------------------------------------
             
             //System.out.println("MONDAY");
-            char[] MondaySlots = {'c','a','d','h','b','g','e'};
+            char[] MondaySlots = {'c','a','d','y','h','b','g','e'};
+            
+            
+            
             String infoMonday = infoStudent.substring(infoStudent.indexOf("Monday")+76, infoStudent.indexOf("Tuesday"));
             Scanner Mon_scan = new Scanner(infoMonday);
             
@@ -86,10 +98,11 @@ class  AlphaPoi
             Course c1M = new Course();
             Course c2M = new Course();
             Course c3M = new Course();
-            Course c4M = new Course();
+            Course c4M = new Course(true, false);
             Course c5M = new Course();
             Course c6M = new Course();
             Course c7M = new Course();
+            Course c8M = new Course();
             
             ArrayList<Course> MondayCourses = new ArrayList<Course>();
             MondayCourses.add(c1M);
@@ -99,6 +112,7 @@ class  AlphaPoi
             MondayCourses.add(c5M);
             MondayCourses.add(c6M);
             MondayCourses.add(c7M);
+            MondayCourses.add(c8M);
             
             int count = 0;
             for(String currentLine: infoMondayByString){
@@ -110,6 +124,8 @@ class  AlphaPoi
                 String courseName = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
+                //deal with multiple slot courses (labs)
+
                 String location = input[3];
                 char slot = input[4].charAt(0);
                 String teacher = input[5];
@@ -150,7 +166,7 @@ class  AlphaPoi
             //System.out.println();
             //System.out.println();
             
-            Day Monday = new Day(c1M, c2M, c3M, c4M, c5M, c6M, c7M);
+            Day Monday = new Day(c1M, c2M, c3M, c4M, c5M, c6M, c7M, c8M);
             setOfAllCourses.add(c1M.getName());
             setOfAllCourses.add(c2M.getName());
             setOfAllCourses.add(c3M.getName());
@@ -164,7 +180,7 @@ class  AlphaPoi
             //TUESDAY CODE BLOCK START----------------------------------------------------------------------------
             
             //System.out.println("TUESDAY");
-            char[] TuesdaySlots = {'d','a','e','h','b','f','c'};
+            char[] TuesdaySlots = {'d','a','e','y','h','b','f','c'};
             String infoTuesday = infoStudent.substring(infoStudent.indexOf("Tuesday")+77, infoStudent.indexOf("Wednesday"));
             Scanner Tue_scan = new Scanner(infoTuesday);
             
@@ -178,10 +194,11 @@ class  AlphaPoi
             Course c1TUE = new Course();
             Course c2TUE = new Course();
             Course c3TUE = new Course();
-            Course c4TUE = new Course();
+            Course c4TUE = new Course(true, false);
             Course c5TUE = new Course();
             Course c6TUE = new Course();
             Course c7TUE = new Course();
+            Course c8TUE = new Course();
             
             ArrayList<Course> TuesdayCourses = new ArrayList<Course>();
             TuesdayCourses.add(c1TUE);
@@ -191,6 +208,7 @@ class  AlphaPoi
             TuesdayCourses.add(c5TUE);
             TuesdayCourses.add(c6TUE);
             TuesdayCourses.add(c7TUE);
+            TuesdayCourses.add(c8TUE);
             
             count = 0;
             for(String currentLine: infoTuesdayByString){
@@ -237,7 +255,7 @@ class  AlphaPoi
             //System.out.println();
             //System.out.println();
             
-            Day Tuesday = new Day(c1TUE, c2TUE, c3TUE, c4TUE, c5TUE, c6TUE, c7TUE);
+            Day Tuesday = new Day(c1TUE, c2TUE, c3TUE, c4TUE, c5TUE, c6TUE, c7TUE, c8TUE);
             setOfAllCourses.add(c1TUE.getName());
             setOfAllCourses.add(c2TUE.getName());
             setOfAllCourses.add(c3TUE.getName());
@@ -250,7 +268,7 @@ class  AlphaPoi
             // WEDNESDAY CODE BLOCK START----------------------------------------------------------------------------
             
             //System.out.println("WEDNESDAY");
-            char[] WednesdaySlots = {'e','a','f','h','b','c','g'};
+            char[] WednesdaySlots = {'e','a','f','y','h','b','c','g'};
             String infoWednesday = infoStudent.substring(infoStudent.indexOf("Wednesday")+79, infoStudent.indexOf("Thursday"));
             Scanner Wed_scan = new Scanner(infoWednesday);
             
@@ -264,10 +282,11 @@ class  AlphaPoi
             Course c1WED = new Course();
             Course c2WED = new Course();
             Course c3WED = new Course();
-            Course c4WED = new Course();
+            Course c4WED = new Course(true, false);
             Course c5WED = new Course();
             Course c6WED = new Course();
             Course c7WED = new Course();
+            Course c8WED = new Course();
             
             ArrayList<Course> WednesdayCourses = new ArrayList<Course>();
             WednesdayCourses.add(c1WED);
@@ -277,6 +296,7 @@ class  AlphaPoi
             WednesdayCourses.add(c5WED);
             WednesdayCourses.add(c6WED);
             WednesdayCourses.add(c7WED);
+            WednesdayCourses.add(c8WED);
             
             count = 0;
             for(String currentLine: infoWednesdayByString){
@@ -323,7 +343,7 @@ class  AlphaPoi
             //System.out.println();
             //System.out.println();
             
-            Day Wednesday = new Day(c1WED, c2WED, c3WED, c4WED, c5WED, c6WED, c7WED);
+            Day Wednesday = new Day(c1WED, c2WED, c3WED, c4WED, c5WED, c6WED, c7WED, c8WED);
             setOfAllCourses.add(c1WED.getName());
             setOfAllCourses.add(c2WED.getName());
             setOfAllCourses.add(c3WED.getName());
@@ -336,7 +356,7 @@ class  AlphaPoi
             // THURSDAY CODE BLOCK START----------------------------------------------------------------------------
             
             //System.out.println("THURSDAY");
-            char[] ThursdaySlots = {'f','a','m','z','g','b','c','d'};
+            char[] ThursdaySlots = {'f','a','m','z','y','g','b','c','d'};
             String infoThursday = infoStudent.substring(infoStudent.indexOf("Thursday")+78, infoStudent.indexOf("Friday"));
             Scanner Thu_scan = new Scanner(infoThursday);
             
@@ -351,10 +371,11 @@ class  AlphaPoi
             Course c2THU = new Course();
             Course c3THU = new Course();
             Course c4THU = new Course();
-            Course c5THU = new Course();
+            Course c5THU = new Course(true, true);
             Course c6THU = new Course();
             Course c7THU = new Course();
             Course c8THU = new Course();
+            Course c9THU = new Course();
             
             ArrayList<Course> ThursdayCourses = new ArrayList<Course>();
             ThursdayCourses.add(c1THU);
@@ -365,6 +386,7 @@ class  AlphaPoi
             ThursdayCourses.add(c6THU);
             ThursdayCourses.add(c7THU);
             ThursdayCourses.add(c8THU);
+            ThursdayCourses.add(c9THU);
             
             count = 0;
             for(String currentLine: infoThursdayByString){
@@ -420,7 +442,7 @@ class  AlphaPoi
             //System.out.println();
             //System.out.println();
             
-            SDay Thursday = new SDay(c1THU, c2THU, c3THU, c4THU, c5THU, c6THU, c7THU, c8THU);
+            SDay Thursday = new SDay(c1THU, c2THU, c3THU, c4THU, c5THU, c6THU, c7THU, c8THU, c9THU);
             setOfAllCourses.add(c1THU.getName());
             setOfAllCourses.add(c2THU.getName());
             setOfAllCourses.add(c3THU.getName());
@@ -433,7 +455,7 @@ class  AlphaPoi
             // FRIDAY CODE BLOCK START----------------------------------------------------------------------------
             
             //System.out.println("FRIDAY");
-            char[] FridaySlots = {'g','a','e','h','b','d','f'};
+            char[] FridaySlots = {'g','a','e','y','h','b','d','f'};
             String infoFriday = infoStudent.substring(infoStudent.indexOf("Friday")+76);
             Scanner Fri_scan = new Scanner(infoFriday);
             
@@ -447,10 +469,11 @@ class  AlphaPoi
             Course c1FRI = new Course();
             Course c2FRI = new Course();
             Course c3FRI = new Course();
-            Course c4FRI = new Course();
+            Course c4FRI = new Course(true, false);
             Course c5FRI = new Course();
             Course c6FRI = new Course();
             Course c7FRI = new Course();
+            Course c8FRI = new Course();
             
             ArrayList<Course> FridayCourses = new ArrayList<Course>();
             FridayCourses.add(c1FRI);
@@ -460,6 +483,7 @@ class  AlphaPoi
             FridayCourses.add(c5FRI);
             FridayCourses.add(c6FRI);
             FridayCourses.add(c7FRI);
+            FridayCourses.add(c8FRI);
             
             count = 0;
             for(String currentLine: infoFridayByString){
@@ -506,7 +530,7 @@ class  AlphaPoi
             //System.out.println();
             //System.out.println();
             
-            Day Friday = new Day(c1FRI, c2FRI, c3FRI, c4FRI, c5FRI, c6FRI, c7FRI);
+            Day Friday = new Day(c1FRI, c2FRI, c3FRI, c4FRI, c5FRI, c6FRI, c7FRI, c8FRI);
             setOfAllCourses.add(c1FRI.getName());
             setOfAllCourses.add(c2FRI.getName());
             setOfAllCourses.add(c3FRI.getName());
@@ -528,6 +552,11 @@ class  AlphaPoi
             //Now we can create the Student object!
             Student thisStudent = new Student(studentName, studentGrade, Monday, Tuesday, Wednesday, Thursday, Friday);
             setOfAllStudents.add(thisStudent.getFullName());
+            setOfAllStudentsR.add(
+                thisStudent.getFullName().substring(
+                    thisStudent.getFullName().indexOf(",")+1)+" "+thisStudent.getFullName().substring(0, thisStudent.getFullName().indexOf(",")
+                )
+            );
             
             if(thisStudent.getGrade().equals("12")){
                seniors.add(thisStudent);
@@ -614,21 +643,25 @@ class  AlphaPoi
                   cell = row.getCell(1);
                   cell.setCellValue(y.getMonday().getCourse(2).getName()+"\n"+y.getMonday().getCourse(2).getLocation());
                   
-                  row = sheet.getRow(45);
+                  row = sheet.getRow(38);
                   cell = row.getCell(1);
                   cell.setCellValue(y.getMonday().getCourse(3).getName()+"\n"+y.getMonday().getCourse(3).getLocation());
                   
-                  row = sheet.getRow(56);
+                  row = sheet.getRow(45);
                   cell = row.getCell(1);
                   cell.setCellValue(y.getMonday().getCourse(4).getName()+"\n"+y.getMonday().getCourse(4).getLocation());
                   
-                  row = sheet.getRow(67);
+                  row = sheet.getRow(56);
                   cell = row.getCell(1);
                   cell.setCellValue(y.getMonday().getCourse(5).getName()+"\n"+y.getMonday().getCourse(5).getLocation());
                   
-                  row = sheet.getRow(78);
+                  row = sheet.getRow(67);
                   cell = row.getCell(1);
                   cell.setCellValue(y.getMonday().getCourse(6).getName()+"\n"+y.getMonday().getCourse(6).getLocation());
+                  
+                  row = sheet.getRow(78);
+                  cell = row.getCell(1);
+                  cell.setCellValue(y.getMonday().getCourse(7).getName()+"\n"+y.getMonday().getCourse(7).getLocation());
                   
                   //TUESDAY
                   row = sheet.getRow(5);
@@ -643,21 +676,25 @@ class  AlphaPoi
                   cell = row.getCell(2);
                   cell.setCellValue(y.getTuesday().getCourse(2).getName()+"\n"+y.getTuesday().getCourse(2).getLocation());
                   
-                  row = sheet.getRow(45);
+                  row = sheet.getRow(38);
                   cell = row.getCell(2);
                   cell.setCellValue(y.getTuesday().getCourse(3).getName()+"\n"+y.getTuesday().getCourse(3).getLocation());
-
-                  row = sheet.getRow(56);
+                  
+                  row = sheet.getRow(45);
                   cell = row.getCell(2);
                   cell.setCellValue(y.getTuesday().getCourse(4).getName()+"\n"+y.getTuesday().getCourse(4).getLocation());
 
-                  row = sheet.getRow(67);
+                  row = sheet.getRow(56);
                   cell = row.getCell(2);
                   cell.setCellValue(y.getTuesday().getCourse(5).getName()+"\n"+y.getTuesday().getCourse(5).getLocation());
 
-                  row = sheet.getRow(78);
+                  row = sheet.getRow(67);
                   cell = row.getCell(2);
                   cell.setCellValue(y.getTuesday().getCourse(6).getName()+"\n"+y.getTuesday().getCourse(6).getLocation());
+
+                  row = sheet.getRow(78);
+                  cell = row.getCell(2);
+                  cell.setCellValue(y.getTuesday().getCourse(7).getName()+"\n"+y.getTuesday().getCourse(7).getLocation());
 
                   //WEDNESDAY
                   row = sheet.getRow(5);
@@ -672,21 +709,25 @@ class  AlphaPoi
                   cell = row.getCell(3);
                   cell.setCellValue(y.getWednesday().getCourse(2).getName()+"\n"+y.getWednesday().getCourse(2).getLocation());
 
-                  row = sheet.getRow(45);
+                  row = sheet.getRow(38);
                   cell = row.getCell(3);
                   cell.setCellValue(y.getWednesday().getCourse(3).getName()+"\n"+y.getWednesday().getCourse(3).getLocation());
+                  
+                  row = sheet.getRow(45);
+                  cell = row.getCell(3);
+                  cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n"+y.getWednesday().getCourse(4).getLocation());
 
                   row = sheet.getRow(56);
                   cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n"+y.getWednesday().getCourse(4).getLocation());
+                  cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n"+y.getWednesday().getCourse(5).getLocation());
                   
                   row = sheet.getRow(67);
                   cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n"+y.getWednesday().getCourse(5).getLocation());
+                  cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n"+y.getWednesday().getCourse(6).getLocation());
 
                   row = sheet.getRow(78);
                   cell = row.getCell(3);
-                  cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n"+y.getWednesday().getCourse(6).getLocation());
+                  cell.setCellValue(y.getWednesday().getCourse(7).getName()+"\n"+y.getWednesday().getCourse(7).getLocation());
 
                   //THURSDAY
                   row = sheet.getRow(2);
@@ -705,21 +746,25 @@ class  AlphaPoi
                   cell = row.getCell(4);
                   cell.setCellValue(y.getThursday().getCourse(3).getName()+"\n"+y.getThursday().getCourse(3).getLocation());
 
-                  row = sheet.getRow(49);
+                  row = sheet.getRow(41);
                   cell = row.getCell(4);
                   cell.setCellValue(y.getThursday().getCourse(4).getName()+"\n"+y.getThursday().getCourse(4).getLocation());
+                  
+                  row = sheet.getRow(49);
+                  cell = row.getCell(4);
+                  cell.setCellValue(y.getThursday().getCourse(5).getName()+"\n"+y.getThursday().getCourse(5).getLocation());
  
                   row = sheet.getRow(59);
                   cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(5).getName()+"\n"+y.getThursday().getCourse(5).getLocation());
+                  cell.setCellValue(y.getThursday().getCourse(6).getName()+"\n"+y.getThursday().getCourse(6).getLocation());
 
                   row = sheet.getRow(69);
                   cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(6).getName()+"\n"+y.getThursday().getCourse(6).getLocation());
+                  cell.setCellValue(y.getThursday().getCourse(7).getName()+"\n"+y.getThursday().getCourse(7).getLocation());
 
                   row = sheet.getRow(79);
                   cell = row.getCell(4);
-                  cell.setCellValue(y.getThursday().getCourse(7).getName()+"\n"+y.getThursday().getCourse(7).getLocation());
+                  cell.setCellValue(y.getThursday().getCourse(8).getName()+"\n"+y.getThursday().getCourse(8).getLocation());
 
                   //FRIDAY
                   row = sheet.getRow(5);
@@ -733,22 +778,26 @@ class  AlphaPoi
                   row = sheet.getRow(27);
                   cell = row.getCell(5);
                   cell.setCellValue(y.getFriday().getCourse(2).getName()+"\n"+y.getFriday().getCourse(2).getLocation());
-
-                  row = sheet.getRow(45);
+                  
+                  row = sheet.getRow(38);
                   cell = row.getCell(5);
                   cell.setCellValue(y.getFriday().getCourse(3).getName()+"\n"+y.getFriday().getCourse(3).getLocation());
 
-                  row = sheet.getRow(56);
+                  row = sheet.getRow(45);
                   cell = row.getCell(5);
                   cell.setCellValue(y.getFriday().getCourse(4).getName()+"\n"+y.getFriday().getCourse(4).getLocation());
 
-                  row = sheet.getRow(67);
+                  row = sheet.getRow(56);
                   cell = row.getCell(5);
                   cell.setCellValue(y.getFriday().getCourse(5).getName()+"\n"+y.getFriday().getCourse(5).getLocation());
 
-                  row = sheet.getRow(78);
+                  row = sheet.getRow(67);
                   cell = row.getCell(5);
                   cell.setCellValue(y.getFriday().getCourse(6).getName()+"\n"+y.getFriday().getCourse(6).getLocation());
+
+                  row = sheet.getRow(78);
+                  cell = row.getCell(5);
+                  cell.setCellValue(y.getFriday().getCourse(7).getName()+"\n"+y.getFriday().getCourse(7).getLocation());
                   
                   //write changes and close fileOut
                   wb.write(fileOut);   
@@ -818,21 +867,25 @@ class  AlphaPoi
           cell = row.getCell(1);
           cell.setCellValue(y.getMonday().getCourse(2).getName()+"\n"+y.getMonday().getCourse(2).getLocation());
           
-          row = sheet.getRow(45);
+          row = sheet.getRow(38);
           cell = row.getCell(1);
           cell.setCellValue(y.getMonday().getCourse(3).getName()+"\n"+y.getMonday().getCourse(3).getLocation());
           
-          row = sheet.getRow(56);
+          row = sheet.getRow(45);
           cell = row.getCell(1);
           cell.setCellValue(y.getMonday().getCourse(4).getName()+"\n"+y.getMonday().getCourse(4).getLocation());
           
-          row = sheet.getRow(67);
+          row = sheet.getRow(56);
           cell = row.getCell(1);
           cell.setCellValue(y.getMonday().getCourse(5).getName()+"\n"+y.getMonday().getCourse(5).getLocation());
           
-          row = sheet.getRow(78);
+          row = sheet.getRow(67);
           cell = row.getCell(1);
           cell.setCellValue(y.getMonday().getCourse(6).getName()+"\n"+y.getMonday().getCourse(6).getLocation());
+          
+          row = sheet.getRow(78);
+          cell = row.getCell(1);
+          cell.setCellValue(y.getMonday().getCourse(7).getName()+"\n"+y.getMonday().getCourse(7).getLocation());
           
           //TUESDAY
           row = sheet.getRow(5);
@@ -847,21 +900,25 @@ class  AlphaPoi
           cell = row.getCell(2);
           cell.setCellValue(y.getTuesday().getCourse(2).getName()+"\n"+y.getTuesday().getCourse(2).getLocation());
           
-          row = sheet.getRow(45);
+          row = sheet.getRow(38);
           cell = row.getCell(2);
           cell.setCellValue(y.getTuesday().getCourse(3).getName()+"\n"+y.getTuesday().getCourse(3).getLocation());
-
-          row = sheet.getRow(56);
+          
+          row = sheet.getRow(45);
           cell = row.getCell(2);
           cell.setCellValue(y.getTuesday().getCourse(4).getName()+"\n"+y.getTuesday().getCourse(4).getLocation());
 
-          row = sheet.getRow(67);
+          row = sheet.getRow(56);
           cell = row.getCell(2);
           cell.setCellValue(y.getTuesday().getCourse(5).getName()+"\n"+y.getTuesday().getCourse(5).getLocation());
 
-          row = sheet.getRow(78);
+          row = sheet.getRow(67);
           cell = row.getCell(2);
           cell.setCellValue(y.getTuesday().getCourse(6).getName()+"\n"+y.getTuesday().getCourse(6).getLocation());
+
+          row = sheet.getRow(78);
+          cell = row.getCell(2);
+          cell.setCellValue(y.getTuesday().getCourse(7).getName()+"\n"+y.getTuesday().getCourse(7).getLocation());
 
           //WEDNESDAY
           row = sheet.getRow(5);
@@ -876,21 +933,25 @@ class  AlphaPoi
           cell = row.getCell(3);
           cell.setCellValue(y.getWednesday().getCourse(2).getName()+"\n"+y.getWednesday().getCourse(2).getLocation());
 
-          row = sheet.getRow(45);
+          row = sheet.getRow(38);
           cell = row.getCell(3);
           cell.setCellValue(y.getWednesday().getCourse(3).getName()+"\n"+y.getWednesday().getCourse(3).getLocation());
+          
+          row = sheet.getRow(45);
+          cell = row.getCell(3);
+          cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n"+y.getWednesday().getCourse(4).getLocation());
 
           row = sheet.getRow(56);
           cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(4).getName()+"\n"+y.getWednesday().getCourse(4).getLocation());
+          cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n"+y.getWednesday().getCourse(5).getLocation());
           
           row = sheet.getRow(67);
           cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(5).getName()+"\n"+y.getWednesday().getCourse(5).getLocation());
+          cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n"+y.getWednesday().getCourse(6).getLocation());
 
           row = sheet.getRow(78);
           cell = row.getCell(3);
-          cell.setCellValue(y.getWednesday().getCourse(6).getName()+"\n"+y.getWednesday().getCourse(6).getLocation());
+          cell.setCellValue(y.getWednesday().getCourse(7).getName()+"\n"+y.getWednesday().getCourse(7).getLocation());
 
           //THURSDAY
           row = sheet.getRow(2);
@@ -909,21 +970,25 @@ class  AlphaPoi
           cell = row.getCell(4);
           cell.setCellValue(y.getThursday().getCourse(3).getName()+"\n"+y.getThursday().getCourse(3).getLocation());
 
-          row = sheet.getRow(49);
+          row = sheet.getRow(41);
           cell = row.getCell(4);
           cell.setCellValue(y.getThursday().getCourse(4).getName()+"\n"+y.getThursday().getCourse(4).getLocation());
-
-          row = sheet.getRow(59);
+          
+          row = sheet.getRow(49);
           cell = row.getCell(4);
           cell.setCellValue(y.getThursday().getCourse(5).getName()+"\n"+y.getThursday().getCourse(5).getLocation());
 
-          row = sheet.getRow(69);
+          row = sheet.getRow(59);
           cell = row.getCell(4);
           cell.setCellValue(y.getThursday().getCourse(6).getName()+"\n"+y.getThursday().getCourse(6).getLocation());
 
-          row = sheet.getRow(79);
+          row = sheet.getRow(69);
           cell = row.getCell(4);
           cell.setCellValue(y.getThursday().getCourse(7).getName()+"\n"+y.getThursday().getCourse(7).getLocation());
+
+          row = sheet.getRow(79);
+          cell = row.getCell(4);
+          cell.setCellValue(y.getThursday().getCourse(8).getName()+"\n"+y.getThursday().getCourse(8).getLocation());
 
           //FRIDAY
           row = sheet.getRow(5);
@@ -937,22 +1002,26 @@ class  AlphaPoi
           row = sheet.getRow(27);
           cell = row.getCell(5);
           cell.setCellValue(y.getFriday().getCourse(2).getName()+"\n"+y.getFriday().getCourse(2).getLocation());
-
-          row = sheet.getRow(45);
+          
+          row = sheet.getRow(38);
           cell = row.getCell(5);
           cell.setCellValue(y.getFriday().getCourse(3).getName()+"\n"+y.getFriday().getCourse(3).getLocation());
 
-          row = sheet.getRow(56);
+          row = sheet.getRow(45);
           cell = row.getCell(5);
           cell.setCellValue(y.getFriday().getCourse(4).getName()+"\n"+y.getFriday().getCourse(4).getLocation());
 
-          row = sheet.getRow(67);
+          row = sheet.getRow(56);
           cell = row.getCell(5);
           cell.setCellValue(y.getFriday().getCourse(5).getName()+"\n"+y.getFriday().getCourse(5).getLocation());
 
-          row = sheet.getRow(78);
+          row = sheet.getRow(67);
           cell = row.getCell(5);
           cell.setCellValue(y.getFriday().getCourse(6).getName()+"\n"+y.getFriday().getCourse(6).getLocation());
+
+          row = sheet.getRow(78);
+          cell = row.getCell(5);
+          cell.setCellValue(y.getFriday().getCourse(7).getName()+"\n"+y.getFriday().getCourse(7).getLocation());
           
           //write changes and close fileOut
           wb.write(fileOut);   
@@ -1293,6 +1362,13 @@ class  AlphaPoi
      }
   } 
   
+  //method that removes a course from a Student's schedule (dropping a course)
+  public void removeCourse(String studentName, String courseToRemove){
+     //do stuff
+     
+     System.out.println(courseToRemove +" has been removed");
+  }
+  
   //method that returns all available courses
   public String[] getAllCourses(){
       String[] arrayOfAllCourses = setOfAllCourses.toArray(new String[setOfAllCourses.size()]);
@@ -1300,11 +1376,18 @@ class  AlphaPoi
       return arrayOfAllCourses;
   }
   
-  //method that returns all students
+  //method that returns all students by last name
   public String[] getAllStudents(){
       String[] arrayOfAllStudents = setOfAllStudents.toArray(new String[setOfAllStudents.size()]);
       Arrays.sort(arrayOfAllStudents);
       return arrayOfAllStudents;
+  }
+  
+  //method that returns all students by first name
+  public String[] getAllStudentsR(){
+      String[] arrayOfAllStudentsR = setOfAllStudentsR.toArray(new String[setOfAllStudentsR.size()]);
+      Arrays.sort(arrayOfAllStudentsR);
+      return arrayOfAllStudentsR;
   }
   
 }

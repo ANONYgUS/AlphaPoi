@@ -34,6 +34,24 @@ public class Course{
         position = 0;
     }
     
+    //constructor for lunch
+    public Course(boolean isLunch, boolean isThursday){
+        courseName = "Lunch";
+        if(isThursday){
+            startTime = "11:15";
+            endTime = "11:50";
+        } else {
+            startTime = "11:00";
+            endTime = "11:30";
+        }
+        location = "";
+        slot = 'y';
+        teacher = "";
+        position = 0;
+    }
+    
+    
+    
     //methods to retrieve information
     
     public String getName(){
@@ -91,5 +109,6 @@ public class Course{
         teacher = t;
         position = p;
     }
+    
     
 }
