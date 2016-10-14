@@ -18,7 +18,7 @@ public class AlphaPoi_DRV
         
         Gui frame = new Gui(pathToFile);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,600);
+        frame.setSize(300,300);
         frame.setVisible(true);
     }
 }

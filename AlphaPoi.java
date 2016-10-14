@@ -14,7 +14,8 @@ import java.nio.channels.FileChannel;
 class  AlphaPoi
 {
   private ArrayList<ArrayList<Student>> bob;
-  
+  Set<String> setOfAllCourses = new HashSet<String>();
+  Set<String> setOfAllStudents = new HashSet<String>();
   
   public AlphaPoi(){
       bob = null;
@@ -150,6 +151,14 @@ class  AlphaPoi
             //System.out.println();
             
             Day Monday = new Day(c1M, c2M, c3M, c4M, c5M, c6M, c7M);
+            setOfAllCourses.add(c1M.getName());
+            setOfAllCourses.add(c2M.getName());
+            setOfAllCourses.add(c3M.getName());
+            setOfAllCourses.add(c4M.getName());
+            setOfAllCourses.add(c5M.getName());
+            setOfAllCourses.add(c6M.getName());
+            setOfAllCourses.add(c7M.getName());
+            
             // MONDAY CODE BLOCK END
             
             //TUESDAY CODE BLOCK START----------------------------------------------------------------------------
@@ -229,6 +238,13 @@ class  AlphaPoi
             //System.out.println();
             
             Day Tuesday = new Day(c1TUE, c2TUE, c3TUE, c4TUE, c5TUE, c6TUE, c7TUE);
+            setOfAllCourses.add(c1TUE.getName());
+            setOfAllCourses.add(c2TUE.getName());
+            setOfAllCourses.add(c3TUE.getName());
+            setOfAllCourses.add(c4TUE.getName());
+            setOfAllCourses.add(c5TUE.getName());
+            setOfAllCourses.add(c6TUE.getName());
+            setOfAllCourses.add(c7TUE.getName());
             // TUESDAY CODE BLOCK END
             
             // WEDNESDAY CODE BLOCK START----------------------------------------------------------------------------
@@ -308,6 +324,13 @@ class  AlphaPoi
             //System.out.println();
             
             Day Wednesday = new Day(c1WED, c2WED, c3WED, c4WED, c5WED, c6WED, c7WED);
+            setOfAllCourses.add(c1WED.getName());
+            setOfAllCourses.add(c2WED.getName());
+            setOfAllCourses.add(c3WED.getName());
+            setOfAllCourses.add(c4WED.getName());
+            setOfAllCourses.add(c5WED.getName());
+            setOfAllCourses.add(c6WED.getName());
+            setOfAllCourses.add(c7WED.getName());
             // WEDNESDAY CODE BLOCK END
             
             // THURSDAY CODE BLOCK START----------------------------------------------------------------------------
@@ -398,6 +421,13 @@ class  AlphaPoi
             //System.out.println();
             
             SDay Thursday = new SDay(c1THU, c2THU, c3THU, c4THU, c5THU, c6THU, c7THU, c8THU);
+            setOfAllCourses.add(c1THU.getName());
+            setOfAllCourses.add(c2THU.getName());
+            setOfAllCourses.add(c3THU.getName());
+            setOfAllCourses.add(c4THU.getName());
+            setOfAllCourses.add(c5THU.getName());
+            setOfAllCourses.add(c6THU.getName());
+            setOfAllCourses.add(c7THU.getName());
             // THURSDAY CODE BLOCK END
             
             // FRIDAY CODE BLOCK START----------------------------------------------------------------------------
@@ -477,6 +507,13 @@ class  AlphaPoi
             //System.out.println();
             
             Day Friday = new Day(c1FRI, c2FRI, c3FRI, c4FRI, c5FRI, c6FRI, c7FRI);
+            setOfAllCourses.add(c1FRI.getName());
+            setOfAllCourses.add(c2FRI.getName());
+            setOfAllCourses.add(c3FRI.getName());
+            setOfAllCourses.add(c4FRI.getName());
+            setOfAllCourses.add(c5FRI.getName());
+            setOfAllCourses.add(c6FRI.getName());
+            setOfAllCourses.add(c7FRI.getName());
             // FRIDAY CODE BLOCK END
             
             //Retreive the name and grade of the student
@@ -490,6 +527,7 @@ class  AlphaPoi
             
             //Now we can create the Student object!
             Student thisStudent = new Student(studentName, studentGrade, Monday, Tuesday, Wednesday, Thursday, Friday);
+            setOfAllStudents.add(thisStudent.getFullName());
             
             if(thisStudent.getGrade().equals("12")){
                seniors.add(thisStudent);
@@ -1098,7 +1136,7 @@ class  AlphaPoi
     }
   }
   
-  public void addClass (String studentName, Course c1, char slot1){
+  public void addCourse (String studentName, Course c1, char slot1){
       
     /**
     make char arrays for slots in order for days, for each day of the week;
@@ -1254,5 +1292,19 @@ class  AlphaPoi
          switchCourses(studentName, "", newCourse, x);
      }
   } 
+  
+  //method that returns all available courses
+  public String[] getAllCourses(){
+      String[] arrayOfAllCourses = setOfAllCourses.toArray(new String[setOfAllCourses.size()]);
+      Arrays.sort(arrayOfAllCourses);
+      return arrayOfAllCourses;
+  }
+  
+  //method that returns all students
+  public String[] getAllStudents(){
+      String[] arrayOfAllStudents = setOfAllStudents.toArray(new String[setOfAllStudents.size()]);
+      Arrays.sort(arrayOfAllStudents);
+      return arrayOfAllStudents;
+  }
   
 }
