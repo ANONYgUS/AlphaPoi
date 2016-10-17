@@ -15,6 +15,7 @@ class  AlphaPoi
 {
   private ArrayList<ArrayList<Student>> bob;
   Set<String> setOfAllCourses = new HashSet<String>();
+  Set<String> setOfAllCourseLocations = new HashSet<String>();
   Set<String> setOfAllStudents = new HashSet<String>();
   Set<String> setOfAllStudentsR = new HashSet<String>();
   
@@ -53,12 +54,12 @@ class  AlphaPoi
         ArrayList<ArrayList<Student>> MASTER = new ArrayList<ArrayList<Student>>();
         
         //start and end times for normal days
-        String[] rightStartTime = {"8:15", "9:10", "10:05", "11:00", "11:35", "12:30", "1:15", "2:10"};
-        String[] rightEndTime = {"9:05", "10:00", "10:55", "11:30", "12:25", "1:10", "2:05", "3:00"};
+        String[] rightStartTime = {"8:15 AM", "9:10 AM", "10:05 AM", "11:00 AM", "11:35 AM", "12:30 PM", "1:15 PM", "2:10 PM"};
+        String[] rightEndTime = {"9:05 AM", "10:00 AM", "10:55 AM", "11:30 AM", "12:25 PM", "1:10 PM", "2:05 PM", "3:00 PM"};
         
         //start and end times for THURSDAY
-        String[] SrightStartTime = {"8:00", "8:50", "9:40", "10:25", "11:15", "11:50", "12:40", "1:25", "2:15"};
-        String[] SrightEndTime = {"8:45", "9:35", "10:20", "11:15", "11:50", "12:35", "1:20", "2:10", "3:00"};
+        String[] SrightStartTime = {"8:00 AM", "8:50 AM", "9:40 AM", "10:25 AM", "11:15 AM", "11:50 AM", "12:40 PM", "1:25 PM", "2:15 PM"};
+        String[] SrightEndTime = {"8:45 AM", "9:35 AM", "10:20 AM", "11:1 AM", "11:50 AM", "12:35 PM", "1:20 PM", "2:10 PM", "3:00 PM"};
         
         for(int i = 0; i<indexesStudent.size(); i++){
             int start = indexesStudent.get(i).intValue();
@@ -95,14 +96,15 @@ class  AlphaPoi
                 infoMondayByString.add(Mon_scan.nextLine());
             }
             
-            Course c1M = new Course();
-            Course c2M = new Course();
-            Course c3M = new Course();
+            //courses need to be initialized with correct starting times...
+            Course c1M = new Course(rightStartTime[0], rightEndTime[0]);
+            Course c2M = new Course(rightStartTime[1], rightEndTime[1]);
+            Course c3M = new Course(rightStartTime[2], rightEndTime[2]);
             Course c4M = new Course(true, false);
-            Course c5M = new Course();
-            Course c6M = new Course();
-            Course c7M = new Course();
-            Course c8M = new Course();
+            Course c5M = new Course(rightStartTime[4], rightEndTime[4]);
+            Course c6M = new Course(rightStartTime[5], rightEndTime[5]);
+            Course c7M = new Course(rightStartTime[6], rightEndTime[6]);
+            Course c8M = new Course(rightStartTime[7], rightEndTime[7]);
             
             ArrayList<Course> MondayCourses = new ArrayList<Course>();
             MondayCourses.add(c1M);
@@ -114,45 +116,152 @@ class  AlphaPoi
             MondayCourses.add(c7M);
             MondayCourses.add(c8M);
             
+            
             int count = 0;
-            for(String currentLine: infoMondayByString){
+            for(int ccc = 0; ccc < infoMondayByString.size(); ccc++){
                 char rightSlot = MondaySlots[count];
                 
                 //System.out.println(currentLine);
-                String[] input = currentLine.split(",");
-                //course names have id's in them... this removes them from the schedule, so that the coursename is shorter and fits better on the cell.
+                String[] input = infoMondayByString.get(ccc).split(",");
+                //course names have id's in them... removes them from the schedule
                 String courseName = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
                 //deal with multiple slot courses (labs)
 
                 String location = input[3];
+                if(location.indexOf("-")>0){
+                    if(location.indexOf("Hope")>=0){
+                        location = "Hope "+location.substring(location.indexOf("-")+2);
+                    }
+                    else{
+                        location = location.substring(location.indexOf("-")+2);
+                    }
+                }
+                setOfAllCourseLocations.add(location);
                 char slot = input[4].charAt(0);
                 String teacher = input[5];
                 
-                //System.out.println("rightSlot: "+rightSlot);
-                //System.out.println("current slot: "+slot);
-                
-                if(Character.toLowerCase(slot) == rightSlot){
+               if(Character.toLowerCase(slot) == rightSlot){
                     MondayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count+1);
+                    //if this course does not start at the right time
+                    if(!(startTime).equals(rightStartTime[count])){
+                        MondayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       MondayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoMondayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
                else if(Character.toLowerCase(slot) == MondaySlots[count+1]){
-                   MondayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
                    count++;
+                   MondayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                   
+                   if(!(startTime).equals(rightStartTime[count])){
+                        MondayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       MondayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoMondayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+                   
+                   
                }
-               else if(Character.toLowerCase(slot) == MondaySlots[count+2]){
+               else if (count+2 < 8 && Character.toLowerCase(slot) == MondaySlots[count+2]){
                    MondayCourses.get(count+2).cAll(courseName, startTime, endTime, location, slot, teacher, count+3);
                    count+=2;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        MondayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       MondayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoMondayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == MondaySlots[count+3]){
+               else if (count+3 < 8 && Character.toLowerCase(slot) == MondaySlots[count+3]){
                    MondayCourses.get(count+3).cAll(courseName, startTime, endTime, location, slot, teacher, count+4);
                    count+=3;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        MondayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       MondayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoMondayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == MondaySlots[count+4]){
+               else if (count+4 < 8 && Character.toLowerCase(slot) == MondaySlots[count+4]){
                    MondayCourses.get(count+4).cAll(courseName, startTime, endTime, location, slot, teacher, count+5);
                    count+=4;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        MondayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       MondayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoMondayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-                count++;
+
+              count++;
             }
             //System.out.println("counter: "+count);
             //System.out.println("CLASS POSITIONS: ");
@@ -191,14 +300,14 @@ class  AlphaPoi
                 infoTuesdayByString.add(Tue_scan.nextLine());
             }
             
-            Course c1TUE = new Course();
-            Course c2TUE = new Course();
-            Course c3TUE = new Course();
+            Course c1TUE = new Course(rightStartTime[0], rightEndTime[0]);
+            Course c2TUE = new Course(rightStartTime[1], rightEndTime[1]);
+            Course c3TUE = new Course(rightStartTime[2], rightEndTime[2]);
             Course c4TUE = new Course(true, false);
-            Course c5TUE = new Course();
-            Course c6TUE = new Course();
-            Course c7TUE = new Course();
-            Course c8TUE = new Course();
+            Course c5TUE = new Course(rightStartTime[4], rightEndTime[4]);
+            Course c6TUE = new Course(rightStartTime[5], rightEndTime[5]);
+            Course c7TUE = new Course(rightStartTime[6], rightEndTime[6]);
+            Course c8TUE = new Course(rightStartTime[7], rightEndTime[7]);
             
             ArrayList<Course> TuesdayCourses = new ArrayList<Course>();
             TuesdayCourses.add(c1TUE);
@@ -211,37 +320,150 @@ class  AlphaPoi
             TuesdayCourses.add(c8TUE);
             
             count = 0;
-            for(String currentLine: infoTuesdayByString){
+            for(int ccc = 0; ccc < infoTuesdayByString.size(); ccc++){
                 char rightSlot = TuesdaySlots[count];
                 
                 //System.out.println(currentLine);
-                String[] input = currentLine.split(",");
+                String[] input = infoTuesdayByString.get(ccc).split(",");
+                //course names have id's in them... removes them from the schedule
                 String courseName = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
+                //deal with multiple slot courses (labs)
+
                 String location = input[3];
+                if(location.indexOf("-")>0){
+                    if(location.indexOf("Hope")>=0){
+                        location = "Hope "+location.substring(location.indexOf("-")+2);
+                    }
+                    else{
+                        location = location.substring(location.indexOf("-")+2);
+                    }
+                }
+                setOfAllCourseLocations.add(location);
                 char slot = input[4].charAt(0);
                 String teacher = input[5];
                 
-                //System.out.println("rightSlot: "+rightSlot);
-                //System.out.println("current slot: "+slot);
-                
-                if(Character.toLowerCase(slot) == rightSlot){
+               if(Character.toLowerCase(slot) == rightSlot){
                     TuesdayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count+1);
+                    //if this course does not start at the right time
+                    if(!(startTime).equals(rightStartTime[count])){
+                        TuesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       TuesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoTuesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
                else if(Character.toLowerCase(slot) == TuesdaySlots[count+1]){
-                   TuesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
                    count++;
+                   TuesdayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                   
+                   if(!(startTime).equals(rightStartTime[count])){
+                        TuesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       TuesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoTuesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+                   
+                   
                }
-               else if(Character.toLowerCase(slot) == TuesdaySlots[count+2]){
+               else if (count+2 < 8 && Character.toLowerCase(slot) == TuesdaySlots[count+2]){
                    TuesdayCourses.get(count+2).cAll(courseName, startTime, endTime, location, slot, teacher, count+3);
                    count+=2;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        TuesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       TuesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoTuesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == TuesdaySlots[count+3]){
+               else if (count+3 < 8 && Character.toLowerCase(slot) == TuesdaySlots[count+3]){
                    TuesdayCourses.get(count+3).cAll(courseName, startTime, endTime, location, slot, teacher, count+4);
                    count+=3;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        TuesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       TuesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoTuesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-                count++;
+               else if (count+4 < 8 && Character.toLowerCase(slot) == TuesdaySlots[count+4]){
+                   TuesdayCourses.get(count+4).cAll(courseName, startTime, endTime, location, slot, teacher, count+5);
+                   count+=4;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        TuesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       TuesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoTuesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+               }
+
+              count++;
             }
             //System.out.println("counter: "+count);
             //System.out.println("CLASS POSITIONS: ");
@@ -279,14 +501,14 @@ class  AlphaPoi
                 infoWednesdayByString.add(Wed_scan.nextLine());
             }
             
-            Course c1WED = new Course();
-            Course c2WED = new Course();
-            Course c3WED = new Course();
+            Course c1WED = new Course(rightStartTime[0], rightEndTime[0]);
+            Course c2WED = new Course(rightStartTime[1], rightEndTime[1]);
+            Course c3WED = new Course(rightStartTime[2], rightEndTime[2]);
             Course c4WED = new Course(true, false);
-            Course c5WED = new Course();
-            Course c6WED = new Course();
-            Course c7WED = new Course();
-            Course c8WED = new Course();
+            Course c5WED = new Course(rightStartTime[4], rightEndTime[4]);
+            Course c6WED = new Course(rightStartTime[5], rightEndTime[5]);
+            Course c7WED = new Course(rightStartTime[6], rightEndTime[6]);
+            Course c8WED = new Course(rightStartTime[7], rightEndTime[7]);
             
             ArrayList<Course> WednesdayCourses = new ArrayList<Course>();
             WednesdayCourses.add(c1WED);
@@ -299,37 +521,150 @@ class  AlphaPoi
             WednesdayCourses.add(c8WED);
             
             count = 0;
-            for(String currentLine: infoWednesdayByString){
+            for(int ccc = 0; ccc < infoWednesdayByString.size(); ccc++){
                 char rightSlot = WednesdaySlots[count];
                 
                 //System.out.println(currentLine);
-                String[] input = currentLine.split(",");
+                String[] input = infoWednesdayByString.get(ccc).split(",");
+                //course names have id's in them... removes them from the schedule
                 String courseName = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
+                //deal with multiple slot courses (labs)
+
                 String location = input[3];
+                if(location.indexOf("-")>0){
+                    if(location.indexOf("Hope")>=0){
+                        location = "Hope "+location.substring(location.indexOf("-")+2);
+                    }
+                    else{
+                        location = location.substring(location.indexOf("-")+2);
+                    }
+                }
+                setOfAllCourseLocations.add(location);
                 char slot = input[4].charAt(0);
                 String teacher = input[5];
                 
-                //System.out.println("rightSlot: "+rightSlot);
-                //System.out.println("current slot: "+slot);
-                
-                if(Character.toLowerCase(slot) == rightSlot){
+               if(Character.toLowerCase(slot) == rightSlot){
                     WednesdayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count+1);
+                    //if this course does not start at the right time
+                    if(!(startTime).equals(rightStartTime[count])){
+                        WednesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       WednesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoWednesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
                else if(Character.toLowerCase(slot) == WednesdaySlots[count+1]){
-                   WednesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
                    count++;
+                   WednesdayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                   
+                   if(!(startTime).equals(rightStartTime[count])){
+                        WednesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       WednesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoWednesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+                   
+                   
                }
-               else if(Character.toLowerCase(slot) == WednesdaySlots[count+2]){
+               else if (count+2 < 8 && Character.toLowerCase(slot) == WednesdaySlots[count+2]){
                    WednesdayCourses.get(count+2).cAll(courseName, startTime, endTime, location, slot, teacher, count+3);
                    count+=2;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        WednesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       WednesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoWednesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == WednesdaySlots[count+3]){
+               else if (count+3 < 8 && Character.toLowerCase(slot) == WednesdaySlots[count+3]){
                    WednesdayCourses.get(count+3).cAll(courseName, startTime, endTime, location, slot, teacher, count+4);
                    count+=3;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        WednesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       WednesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoWednesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-                count++;
+               else if (count+4 < 8 && Character.toLowerCase(slot) == WednesdaySlots[count+4]){
+                   WednesdayCourses.get(count+4).cAll(courseName, startTime, endTime, location, slot, teacher, count+5);
+                   count+=4;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        WednesdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       WednesdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoWednesdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+               }
+
+              count++;
             }
             //System.out.println("counter: "+count);
             //System.out.println("CLASS POSITIONS: ");
@@ -367,15 +702,15 @@ class  AlphaPoi
                 infoThursdayByString.add(Thu_scan.nextLine());
             }
             
-            Course c1THU = new Course();
-            Course c2THU = new Course();
-            Course c3THU = new Course();
-            Course c4THU = new Course();
+            Course c1THU = new Course(SrightStartTime[0], SrightEndTime[0]);
+            Course c2THU = new Course(SrightStartTime[1], SrightEndTime[1]);
+            Course c3THU = new Course(SrightStartTime[2], SrightEndTime[2]);
+            Course c4THU = new Course(SrightStartTime[3], SrightEndTime[3]);
             Course c5THU = new Course(true, true);
-            Course c6THU = new Course();
-            Course c7THU = new Course();
-            Course c8THU = new Course();
-            Course c9THU = new Course();
+            Course c6THU = new Course(SrightStartTime[5], SrightEndTime[5]);
+            Course c7THU = new Course(SrightStartTime[6], SrightEndTime[6]);
+            Course c8THU = new Course(SrightStartTime[7], SrightEndTime[7]);
+            Course c9THU = new Course(SrightStartTime[8], SrightEndTime[8]);
             
             ArrayList<Course> ThursdayCourses = new ArrayList<Course>();
             ThursdayCourses.add(c1THU);
@@ -389,45 +724,150 @@ class  AlphaPoi
             ThursdayCourses.add(c9THU);
             
             count = 0;
-            for(String currentLine: infoThursdayByString){
+            for(int ccc = 0; ccc < infoThursdayByString.size(); ccc++){
                 char rightSlot = ThursdaySlots[count];
                 
                 //System.out.println(currentLine);
-                String[] input = currentLine.split(",");
+                String[] input = infoThursdayByString.get(ccc).split(",");
+                //course names have id's in them... removes them from the schedule
                 String courseName = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
+                //deal with multiple slot courses (labs)
+
                 String location = input[3];
+                if(location.indexOf("-")>0){
+                    if(location.indexOf("Hope")>=0){
+                        location = "Hope "+location.substring(location.indexOf("-")+2);
+                    }
+                    else{
+                        location = location.substring(location.indexOf("-")+2);
+                    }
+                }
+                setOfAllCourseLocations.add(location);
                 char slot = input[4].charAt(0);
                 String teacher = input[5];
                 
-                //System.out.println("rightSlot: "+rightSlot);
-                //System.out.println("current slot: "+slot);
-               
                if(Character.toLowerCase(slot) == rightSlot){
                     ThursdayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count+1);
+                    //if this course does not start at the right time
+                    if(!(startTime).equals(SrightStartTime[count])){
+                        ThursdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(SrightEndTime[count])){
+                       ThursdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoThursdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
                else if(Character.toLowerCase(slot) == ThursdaySlots[count+1]){
-                   ThursdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
                    count++;
+                   ThursdayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                   
+                   if(!(startTime).equals(SrightStartTime[count])){
+                        ThursdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(SrightEndTime[count])){
+                       ThursdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoThursdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+                   
+                   
                }
-               else if(Character.toLowerCase(slot) == ThursdaySlots[count+2]){
+               else if (count+2 < 8 && Character.toLowerCase(slot) == ThursdaySlots[count+2]){
                    ThursdayCourses.get(count+2).cAll(courseName, startTime, endTime, location, slot, teacher, count+3);
                    count+=2;
+                       if(!(startTime).equals(SrightStartTime[count])){
+                        ThursdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(SrightEndTime[count])){
+                       ThursdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoThursdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == ThursdaySlots[count+3]){
+               else if (count+3 < 8 && Character.toLowerCase(slot) == ThursdaySlots[count+3]){
                    ThursdayCourses.get(count+3).cAll(courseName, startTime, endTime, location, slot, teacher, count+4);
                    count+=3;
+                       if(!(startTime).equals(SrightStartTime[count])){
+                        ThursdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(SrightEndTime[count])){
+                       ThursdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoThursdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == ThursdaySlots[count+4]){
-                   ThursdayCourses.get(count+4).cAll(courseName, startTime, endTime, location, slot, teacher, count+5);
+               else if (count+4 < 8 && Character.toLowerCase(slot) == ThursdaySlots[count+4]){
+                   ThursdayCourses.get(count+4).cAll(courseName, startTime, endTime, location, slot, teacher, count+4);
                    count+=4;
+                       if(!(startTime).equals(SrightStartTime[count])){
+                        ThursdayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(SrightEndTime[count])){
+                       ThursdayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoThursdayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == ThursdaySlots[count+5]){
-                   ThursdayCourses.get(count+5).cAll(courseName, startTime, endTime, location, slot, teacher, count+6);
-                   count+=5;
-               }
-               count++;
+
+              count++;
             }
             //System.out.println("counter: "+count);
             //System.out.println("CLASS POSITIONS: ");
@@ -466,14 +906,14 @@ class  AlphaPoi
                 infoFridayByString.add(Fri_scan.nextLine());
             }
             
-            Course c1FRI = new Course();
-            Course c2FRI = new Course();
-            Course c3FRI = new Course();
+            Course c1FRI = new Course(rightStartTime[0], rightEndTime[0]);
+            Course c2FRI = new Course(rightStartTime[1], rightEndTime[1]);
+            Course c3FRI = new Course(rightStartTime[2], rightEndTime[2]);
             Course c4FRI = new Course(true, false);
-            Course c5FRI = new Course();
-            Course c6FRI = new Course();
-            Course c7FRI = new Course();
-            Course c8FRI = new Course();
+            Course c5FRI = new Course(rightStartTime[4], rightEndTime[4]);
+            Course c6FRI = new Course(rightStartTime[5], rightEndTime[5]);
+            Course c7FRI = new Course(rightStartTime[6], rightEndTime[6]);
+            Course c8FRI = new Course(rightStartTime[7], rightEndTime[7]);
             
             ArrayList<Course> FridayCourses = new ArrayList<Course>();
             FridayCourses.add(c1FRI);
@@ -486,37 +926,150 @@ class  AlphaPoi
             FridayCourses.add(c8FRI);
             
             count = 0;
-            for(String currentLine: infoFridayByString){
+            for(int ccc = 0; ccc < infoFridayByString.size(); ccc++){
                 char rightSlot = FridaySlots[count];
                 
                 //System.out.println(currentLine);
-                String[] input = currentLine.split(",");
+                String[] input = infoFridayByString.get(ccc).split(",");
+                //course names have id's in them... removes them from the schedule
                 String courseName = input[0].substring(0, input[0].indexOf("(")).trim();
                 String startTime = input[1];
                 String endTime = input[2];
+                //deal with multiple slot courses (labs)
+
                 String location = input[3];
+                if(location.indexOf("-")>0){
+                    if(location.indexOf("Hope")>=0){
+                        location = "Hope "+location.substring(location.indexOf("-")+2);
+                    }
+                    else{
+                        location = location.substring(location.indexOf("-")+2);
+                    }
+                }
+                setOfAllCourseLocations.add(location);
                 char slot = input[4].charAt(0);
                 String teacher = input[5];
                 
-                //System.out.println("rightSlot: "+rightSlot);
-                //System.out.println("current slot: "+slot);
-                
-                if(Character.toLowerCase(slot) == rightSlot){
+               if(Character.toLowerCase(slot) == rightSlot){
                     FridayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count+1);
+                    //if this course does not start at the right time
+                    if(!(startTime).equals(rightStartTime[count])){
+                        FridayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       FridayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoFridayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
                else if(Character.toLowerCase(slot) == FridaySlots[count+1]){
-                   FridayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
                    count++;
+                   FridayCourses.get(count).cAll(courseName, startTime, endTime, location, slot, teacher, count);
+                   
+                   if(!(startTime).equals(rightStartTime[count])){
+                        FridayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       FridayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoFridayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+                   
+                   
                }
-               else if(Character.toLowerCase(slot) == FridaySlots[count+2]){
+               else if (count+2 < 8 && Character.toLowerCase(slot) == FridaySlots[count+2]){
                    FridayCourses.get(count+2).cAll(courseName, startTime, endTime, location, slot, teacher, count+3);
                    count+=2;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        FridayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       FridayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoFridayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-               else if(Character.toLowerCase(slot) == FridaySlots[count+3]){
+               else if (count+3 < 8 && Character.toLowerCase(slot) == FridaySlots[count+3]){
                    FridayCourses.get(count+3).cAll(courseName, startTime, endTime, location, slot, teacher, count+4);
                    count+=3;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        FridayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       FridayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoFridayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
                }
-                count++;
+               else if (count+4 < 8 && Character.toLowerCase(slot) == FridaySlots[count+4]){
+                   FridayCourses.get(count+4).cAll(courseName, startTime, endTime, location, slot, teacher, count+5);
+                   count+=4;
+                       if(!(startTime).equals(rightStartTime[count])){
+                        FridayCourses.get(count-1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                    }
+               
+                   //if this course does not end at the right time
+                   if(!(endTime).equals(rightEndTime[count])){
+                       FridayCourses.get(count+1).cAll(courseName, startTime, endTime, location, slot, teacher, count+2);
+                       count++;
+                       //check for overlapping classes...
+                       String[] inputC = infoFridayByString.get(ccc+1).split(",");
+                       String startTimeC = inputC[1];
+                       String endTimeC = inputC[2];
+                       char slotC = inputC[4].charAt(0);
+                       if(endTimeC.equals(endTime)){
+                           //skip the next class
+                           ccc++;
+                           count--;
+                       }
+                   }
+               }
+
+              count++;
             }
             //System.out.println("counter: "+count);
             //System.out.println("CLASS POSITIONS: ");
@@ -570,16 +1123,6 @@ class  AlphaPoi
             else if(thisStudent.getGrade().equals("9")){
                 freshmen.add(thisStudent);
             }
-            
-            
-            
-            
-            /**
-            for(Student y : seniors){
-               System.out.println(y.getFullName());
-               System.out.println(y.getGrade());
-            }
-            */
             
             
         }
@@ -1388,6 +1931,13 @@ class  AlphaPoi
       String[] arrayOfAllStudentsR = setOfAllStudentsR.toArray(new String[setOfAllStudentsR.size()]);
       Arrays.sort(arrayOfAllStudentsR);
       return arrayOfAllStudentsR;
+  }
+  
+  //method that returns all course locations
+  public String[] getAllCourseLocations(){
+      String[] arrayOfAllCourseLocations = setOfAllCourseLocations.toArray(new String[setOfAllCourseLocations.size()]);
+      Arrays.sort(arrayOfAllCourseLocations);
+      return arrayOfAllCourseLocations;
   }
   
 }

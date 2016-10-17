@@ -23,11 +23,10 @@ public class Course{
         position = 1;
     }
     
-    //empty constructor
-    public Course(){
+    public Course(String startT, String endT){
         courseName = "";
-        startTime = "";
-        endTime = "";
+        startTime = startT;
+        endTime = endT;
         location = "";
         slot = 'x';
         teacher = "";
@@ -38,11 +37,11 @@ public class Course{
     public Course(boolean isLunch, boolean isThursday){
         courseName = "Lunch";
         if(isThursday){
-            startTime = "11:15";
-            endTime = "11:50";
+            startTime = "11:15 AM";
+            endTime = "11:50 AM";
         } else {
-            startTime = "11:00";
-            endTime = "11:30";
+            startTime = "11:00 AM";
+            endTime = "11:30 AM";
         }
         location = "";
         slot = 'y';

@@ -13,11 +13,12 @@ public class SDay {
 	private Course course6;
 	private Course course7;
 	private Course course8;
+	private Course course9;
 	
 	ArrayList<Course> courses = new ArrayList<Course>();
 	
 	//constructor
-	public SDay(Course c1, Course c2, Course c3, Course c4, Course c5, Course c6, Course c7, Course c8){
+	public SDay(Course c1, Course c2, Course c3, Course c4, Course c5, Course c6, Course c7, Course c8, Course c9){
 		course1 = c1;
 		course2 = c2;
 		course3 = c3;
@@ -26,6 +27,7 @@ public class SDay {
 		course6 = c6;
 		course7 = c7;
 		course8 = c8;
+		course9 = c9;
 		
 		//put all courses into a array for easier referencing
 		
@@ -37,6 +39,7 @@ public class SDay {
 		courses.add(course6);
 		courses.add(course7);
 		courses.add(course8);
+		courses.add(course9);
 	}
 	
 	
