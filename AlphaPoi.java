@@ -18,6 +18,7 @@ class  AlphaPoi
   Set<String> setOfAllCourseLocations = new HashSet<String>();
   Set<String> setOfAllStudents = new HashSet<String>();
   Set<String> setOfAllStudentsR = new HashSet<String>();
+  Map<String, String> ADrops = new HashMap<String, String>();
   
   public AlphaPoi(){
       bob = null;
@@ -27,7 +28,8 @@ class  AlphaPoi
       bob = MASTER;
   }
   
-  public AlphaPoi(String path_to_studentinfo_csv) throws Exception{
+  public AlphaPoi(String path_to_studentinfo_csv, String path_to_drops) throws Exception{ 
+      
       //get indexes of where each Student's information starts in the csv file (searched for " character)
         ArrayList<Integer> indexesStudent = new ArrayList<Integer>();
         Scanner indexfinder = new Scanner(new File(path_to_studentinfo_csv));
@@ -1172,12 +1174,84 @@ class  AlphaPoi
             
             
         }
+        
+        //get drops
+        InputStream inp1 = new FileInputStream(path_to_drops);
+        Workbook w = WorkbookFactory.create(inp1);
+        Sheet sheet = w.getSheetAt(0);
+      
+        for(Row row : sheet){
+            String name = row.getCell(0).getStringCellValue();
+            String dropday = row.getCell(3).getStringCellValue();
+            //System.out.println(name+" "+dropday);
+            if(!name.isEmpty() && !dropday.isEmpty()){
+                ADrops.put(name, dropday);
+            }
+        }
+        
+        
+ 
         MASTER.add(freshmen);
         MASTER.add(sophomores);
         MASTER.add(juniors);
         MASTER.add(seniors);
         
         bob = MASTER;
+        
+        for(ArrayList<Student> a : bob){
+            for(Student b : a){
+                for(int i = 0; i < 8; i++){
+                    if(b.getMonday().getCourse(i).getSlot() == 'A'){
+                        if(ADrops.containsKey(b.getMonday().getCourse(i).getName())){
+                            if(ADrops.get(b.getMonday().getCourse(i).getName()).equals("A Slot No M")){
+                                //turns this class into a free
+                                b.getMonday().getCourse(i).cAll("", b.getMonday().getCourse(i).getStartTime(), b.getMonday().getCourse(i).getEndTime(), "", b.getMonday().getCourse(i).getSlot(), "", 1);
+                            }
+                        }
+                    }
+                }
+                for(int i = 0; i < 8; i++){
+                    if(b.getTuesday().getCourse(i).getSlot() == 'A'){
+                        if(ADrops.containsKey(b.getTuesday().getCourse(i).getName())){
+                            if(ADrops.get(b.getTuesday().getCourse(i).getName()).equals("A Slot No T")){
+                                //turns this class into a free
+                                b.getTuesday().getCourse(i).cAll("", b.getTuesday().getCourse(i).getStartTime(), b.getTuesday().getCourse(i).getEndTime(), "", b.getTuesday().getCourse(i).getSlot(), "", 1);
+                            }
+                        }
+                    }
+                }
+                for(int i = 0; i < 8; i++){
+                    if(b.getWednesday().getCourse(i).getSlot() == 'A'){
+                        if(ADrops.containsKey(b.getWednesday().getCourse(i).getName())){
+                            if(ADrops.get(b.getWednesday().getCourse(i).getName()).equals("A Slot No W")){
+                                //turns this class into a free
+                                b.getWednesday().getCourse(i).cAll("", b.getWednesday().getCourse(i).getStartTime(), b.getWednesday().getCourse(i).getEndTime(), "", b.getWednesday().getCourse(i).getSlot(), "", 1);
+                            }
+                        }
+                    }
+                }
+                for(int i = 0; i < 9; i++){
+                    if(b.getThursday().getCourse(i).getSlot() == 'A'){
+                        if(ADrops.containsKey(b.getThursday().getCourse(i).getName())){
+                            if(ADrops.get(b.getThursday().getCourse(i).getName()).equals("A Slot No Th")){
+                                //turns this class into a free
+                                b.getThursday().getCourse(i).cAll("", b.getThursday().getCourse(i).getStartTime(), b.getThursday().getCourse(i).getEndTime(), "", b.getThursday().getCourse(i).getSlot(), "", 1);
+                            }
+                        }
+                    }
+                }
+                for(int i = 0; i < 8; i++){
+                    if(b.getFriday().getCourse(i).getSlot() == 'A'){
+                        if(ADrops.containsKey(b.getFriday().getCourse(i).getName())){
+                            if(ADrops.get(b.getFriday().getCourse(i).getName()).equals("A Slot No F")){
+                                //turns this class into a free
+                                b.getFriday().getCourse(i).cAll("", b.getFriday().getCourse(i).getStartTime(), b.getFriday().getCourse(i).getEndTime(), "", b.getFriday().getCourse(i).getSlot(), "", 1);
+                            }
+                        }
+                    }
+                }
+            }
+        }
   }
   
   public void printStudentSchedule(String nameOfStudent) throws Exception{

@@ -6,10 +6,10 @@ import java.io.*;
 
 public class Gui extends JFrame
 {
-    public Gui(String path) throws Exception{
+    public Gui(String path, String drops) throws Exception{
         super("Schedule Manager");
         setLayout(new FlowLayout());
-        AlphaPoi obj = new AlphaPoi(path);
+        AlphaPoi obj = new AlphaPoi(path, drops);
         
         //course list sorted alphabetically
         JComboBox cb1 = new JComboBox(obj.getAllCourses());

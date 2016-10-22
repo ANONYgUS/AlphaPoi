@@ -15,8 +15,15 @@ public class AlphaPoi_DRV
             pathToFile = courseIDFile.getAbsolutePath();
         }
         
+        String pathToDROPS = "";
+        if (chooseCourseID.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+        {
+            File DROPS = chooseCourseID.getSelectedFile();
+            pathToDROPS = DROPS.getAbsolutePath();
+        }
         
-        Gui frame = new Gui(pathToFile);
+        
+        Gui frame = new Gui(pathToFile, pathToDROPS);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(300,300);
         frame.setVisible(true);
